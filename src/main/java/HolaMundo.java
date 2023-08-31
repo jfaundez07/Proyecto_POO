@@ -7,6 +7,9 @@ public class HolaMundo {
         System.out.println("Christian Gajardo");
 
         System.out.println("Hola Mundo de Javier Alcalde");
+        System.out.println("Hola Mundo");
+        System.out.println("Joaquin Faundez");
+
     }
 
 }
