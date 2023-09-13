@@ -1,9 +1,11 @@
+import com.github.stefanbirkner.systemlambda.SystemLambda;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
@@ -15,19 +17,14 @@ class MainTest {
     JSONObject cabana2 = new JSONObject();
 
     String expectedOutput =
-            "Cabañas existentes: \n" +
-                    "\n" +
+            "\n" +
                     "Id: 1\n" +
                     "Nombre: Cabaña 1\n" +
                     "Cantidad de habitaciones: 2\n" +
                     "Cantidad de baños: 1\n" +
-                    "Estado: false\n" +
-                    "\n" +
-                    "Id: 2\n" +
-                    "Nombre: Cabaña 2\n" +
-                    "Cantidad de habitaciones: 3\n" +
-                    "Cantidad de baños: 2\n" +
-                    "Estado: false\n";
+                    "Esta ocupada: false\n";
+
+    String textmostrarCabaña;
 
 
     @BeforeEach
@@ -57,6 +54,14 @@ class MainTest {
 
         Main.agregarCabaña(ListaCabañas, cabana1);
         Main.agregarCabaña(ListaCabañas, cabana2);
+
+        try {
+            textmostrarCabaña = SystemLambda.tapSystemOut(() -> {
+                Main.mostrarCabaña(cabana1);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -116,16 +121,10 @@ class MainTest {
     }
 
     @Test
-    public void Mostrarcabañas(){
-        String text = null;
-        try {
-            text = SystemLambda.tapSystemOut(() -> {
-                Main.mostrarCabañasExistentes(ListaCabañas);
-            });
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void mostrarcabañasExistente(){
+        expectedOutput = expectedOutput.replace("\r\n", "\n");
+        textmostrarCabaña = textmostrarCabaña.replace("\r\n", "\n");
 
-        assertEquals(expectedOutput, text);
+        assertEquals(expectedOutput, textmostrarCabaña);
     }
 }

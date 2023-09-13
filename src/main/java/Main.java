@@ -116,3 +116,158 @@ public class Main {
         listCabañas.add(newCabaña);
     }
 
+<<<<<<< HEAD
+=======
+    public static void mostrarCabaña(JSONObject Cabaña) {
+
+        System.out.println();
+        System.out.println("Id: " + Cabaña.get("Id"));
+        System.out.println("Nombre: " + Cabaña.get("Nombre"));
+        System.out.println("Cantidad de habitaciones: " + Cabaña.get("Habitaciones"));
+        System.out.println("Cantidad de baños: " + Cabaña.get("Baños"));
+        System.out.println("Esta ocupada: " + Cabaña.get("isOcupada"));
+    }
+
+    public static void mostrarCabañasExistentes(ArrayList<JSONObject> listCabañas) {
+
+        System.out.println("\nCabañas existentes: ");
+
+        for (int i = 0; i < listCabañas.size(); i++) {
+
+            mostrarCabaña(listCabañas.get(i));
+
+        }
+    }
+
+    //Agregue este metodo
+    public static void mostrarCabañasReservadas(JSONObject usuarioIngresado, ArrayList<JSONObject> listCabañas) {
+
+        int contador = 0;
+
+        for (int i = 0; i < listCabañas.size(); i++) {
+
+            if (listCabañas.get(i).get("Arrendatario").equals(usuarioIngresado)){
+                contador += 1;
+                mostrarCabaña(listCabañas.get(i));
+            }
+        }
+
+        if (contador == 0) {
+            System.out.println(usuarioIngresado.get("Usuario") + " aun no ha reservado ninguna cabaña.");
+        }
+    }
+
+    public static void reservarCabaña(JSONObject usuarioIngresado, ArrayList<JSONObject> listCabañas){
+
+        System.out.println("\nReserva de cabañas");
+
+        mostrarCabañasExistentes(listCabañas);
+
+        try{ System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
+            int elegirID = leer.nextInt();
+
+            for (int i = 0; i < listCabañas.size(); i++) {
+
+                JSONObject cabañaSeleccionada = listCabañas.get(i);
+
+                if (idExiste(elegirID, cabañaSeleccionada)) {
+
+                    if (isLibre(cabañaSeleccionada)) {
+
+                        cabañaSeleccionada.put("isOcupada", true);
+                        cabañaSeleccionada.put("Arrendatario", usuarioIngresado);
+
+                        System.out.println(usuarioIngresado.get("Usuario") + "! Su cabaña fue reservada exitosamente");
+                    } else{
+                        System.out.println("\nCabaña ocupada");
+                    }
+                }
+            }
+        }catch (Exception e) {
+            // manejar la excepción
+            System.out.println("Opcion inválida");
+        }
+
+    }
+
+    public static void checkOutCabaña(JSONObject usuarioIngresado, ArrayList<JSONObject> listCabañas){
+
+        System.out.println("\nCheck-Out Cabañas: ");
+
+        mostrarCabañasReservadas(usuarioIngresado, listCabañas);
+
+        System.out.println("\nIngrese la ID de la cabaña que desea hacer check-out ");
+        int elegirID = leer.nextInt();
+
+        for (int i = 0; i < listCabañas.size(); i++) {
+
+            JSONObject cabañaSeleccionada = listCabañas.get(i);
+
+            if (idExiste(elegirID, cabañaSeleccionada)) {
+
+                if (!isLibre(cabañaSeleccionada)) {
+
+                    cabañaSeleccionada.put("isOcupada", false);
+                    cabañaSeleccionada.put("Arrendatario", 0);
+
+                    System.out.println(usuarioIngresado.get("Usuario") + "! El check-out fue realizado exitosamente");
+                }
+            }
+        }
+    }
+
+    public static boolean isLibre(JSONObject cabaña) {
+
+        if (cabaña.get("isOcupada").equals(false)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean idExiste(int id, JSONObject cabañaSeleccionada) {
+        if ( id == (int) cabañaSeleccionada.get("Id")){
+            return true;
+        }
+        return false;
+    }
+
+
+    //METODOS MENU
+    public static void opcionesMenu(JSONObject usuarioIngresado) {
+        System.out.println("\nMenu Cabañas. Usuario: " + usuarioIngresado.get("Usuario"));
+        System.out.println("[0] Salir\n[1] Mostrar Cabañas existentes\n[2] Reservar Cabaña\n[3] Ver Mis Cabañas Reservadas\n[4] Realizar Check-Out\nQue desea hacer?: ");
+    }
+
+    public static void menu(ArrayList<JSONObject> listCabañas, ArrayList<JSONObject> listUsuarios) {
+
+        JSONObject usuarioIngresado = listUsuarios.get(LoginUsario(listUsuarios));
+
+        String seleccion;
+
+        do {
+            opcionesMenu(usuarioIngresado);
+            seleccion = leer.nextLine();
+
+            switch (seleccion) {
+
+                case "1" -> mostrarCabañasExistentes(listCabañas);
+                case "2" -> reservarCabaña(usuarioIngresado, listCabañas);
+                case "3" -> mostrarCabañasReservadas(usuarioIngresado, listCabañas);
+                case "4" -> checkOutCabaña(usuarioIngresado, listCabañas);
+
+            }
+
+        } while (!seleccion.equals("0"));
+
+    }
+
+    public static void OpcionesMenuBienvenida() {
+        System.out.println("\nBienvenido a R.A \nElija una opcion:");
+        System.out.println("[0] Salir\n[1] Iniciar sesión\n[2] Registrar usuario\nQue desea hacer?: ");
+    }
+
+
+
+}
+>>>>>>> Joaquin-Faundez
