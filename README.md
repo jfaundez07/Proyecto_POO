@@ -3,17 +3,26 @@ Integrantes:
 (2) Joaquin Faundez
 (3) Javier Alcalde
 
-Actividades desarrolladas:
-Se subieron codigos propios a las ramas de cada integrante en el repositorio, los mstraban por consola el mensaje "Hola Mundo" 
-junto al nombre y apellido de cada integrante.
-Posteriormente, se realizo un merge a la rama master de todas las ramas de los integranes.
+La poca visualización que presentan los pequeños emprendimientos o “pymes” de zonas poco conocidas, es una problemática 
+que afecta directamente a los dueños de negocios en el rubro del turismo, específicamente en el arriendo de hospedajes.
+Reserv-App (R.A.) es un software destinado a una pyme de cabañas (dos cabañas, siendo posible agregar más posteriormente) 
+ubicadas en la región de la Araucanía, Chile. La problemática que se busca abordar con R.A. es dar accesibilidad a estas 
+cabañas que no se encuentran en las grandes plataformas tales como AIRBNB o Booking, dándole al usuario  la posibilidad 
+de reservar estas cabañas a través de la aplicación, puesto a que en principio estas se reservan hablando directamente 
+con los dueños de la pyme. De esta manera la reserva es más directa.
 
-Comentarios: 
-// Es necesario actualziar el projecto (update project) cada vez que se hara un merge/pull en la rama master.
-// Es necesario tambien activar como projecto maven luego de hacer un pull.
+Métodos principales  
 
-Conclusiones:
-El trabajo con git hub facilita mucho la colaboración entre desarrolladores, especialmente a la hora de poder seleccionar los bloques de código
-que se agregaran a la rama master. Cabe destacar que la interfaz para seleccionar dichos bloques de código, es bastante intuitiva, lo que facilita
-dicha operacion.
-Sin embargo, el uso correcto de git hub requiere bastante del proceso "prueba y error" para utilizarlo de manera efectiva.
+-Crear Usuario (nombre, celular, contraseña)  
+
+-Iniciar sesión (Verifica que sea un usuario ya existente)  
+
+-Crear Cabaña(json con las características de la cabaña) 
+
+-Mostrar cabañas Arrendada(muestra la información de la cabaña)  
+
+-Reservar Cabaña (se reserva la cabaña por 12 horas)  
+
+-Mostrar Cabañas(que muestra la información de todas las cabañas, y el estado de estas, que será true si está ocupada, y false si está libre.)  
+
+-Menú (Que se encarga de desplegar todas las funciones mencionadas anteriormente)
