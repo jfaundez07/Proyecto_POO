@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {MenuBienvenida();}
 
 
+<<<<<<< HEAD
     //METODOS DE LOS USUARIOS
     public static void crearUsuarios(ArrayList<JSONObject> listraUsuarios) {
 
@@ -261,13 +262,41 @@ public class Main {
         } while (!seleccion.equals("0"));
 
     }
+=======
+>>>>>>> Christian-Gajardo
 
     public static void OpcionesMenuBienvenida() {
         System.out.println("\nBienvenido a R.A \nElija una opcion:");
         System.out.println("[0] Salir\n[1] Iniciar sesión\n[2] Registrar usuario\nQue desea hacer?: ");
     }
 
+<<<<<<< HEAD
 
 
 }
 
+=======
+    public static void MenuBienvenida() {
+
+        ArrayList<JSONObject> listCabañas = new ArrayList<JSONObject>();
+        ArrayList<JSONObject> listUsuarios = new ArrayList<JSONObject>();
+
+        crearCabañas(listCabañas);
+        crearUsuarios(listUsuarios);
+
+        String Seleccion;
+
+        do {
+            OpcionesMenuBienvenida();
+            Seleccion = leer.nextLine();
+
+            switch (Seleccion){
+                case "1" -> menu(listCabañas, listUsuarios);
+                case "2" -> System.out.println("Aun no existe");
+            }
+
+        } while (!Seleccion.equals("0"));
+    }
+
+}
+>>>>>>> Christian-Gajardo

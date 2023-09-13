@@ -17,7 +17,7 @@ class MainTest {
     JSONObject cabana2 = new JSONObject();
 
     String expectedOutput =
-            "\n" +
+                    "\n" +
                     "Id: 1\n" +
                     "Nombre: Cabaña 1\n" +
                     "Cantidad de habitaciones: 2\n" +
