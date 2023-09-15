@@ -3,6 +3,9 @@ Integrantes:
 (2) Joaquin Faundez
 (3) Javier Alcalde
 
+Link video:
+https://youtu.be/9TWX9oW2B6I?feature=shared
+
 La poca visualización que presentan los pequeños emprendimientos o “pymes” de zonas poco conocidas, es una problemática 
 que afecta directamente a los dueños de negocios en el rubro del turismo, específicamente en el arriendo de hospedajes.
 Reserv-App (R.A.) es un software destinado a una pyme de cabañas (dos cabañas, siendo posible agregar más posteriormente) 
