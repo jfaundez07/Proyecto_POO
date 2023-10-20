@@ -1,5 +1,8 @@
+package primeraVersion;
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -66,21 +69,21 @@ class MainTest {
 
     @Test
     void validarUsuarioCorrecto() {
-        assertTrue(Main.validarUsuario(ListaUsuarios, "Javier", "987654321"));
-        assertTrue(Main.validarUsuario(ListaUsuarios, "Klima", "135792468"));
+        Assertions.assertTrue(Main.validarUsuario(ListaUsuarios, "Javier", "987654321"));
+        Assertions.assertTrue(Main.validarUsuario(ListaUsuarios, "Klima", "135792468"));
     }
 
     @Test
     void validarUsuarioIncorrecto(){
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Javier", "123456789"));
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Klima", "123456789"));
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Xiao", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Javier", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Klima", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Xiao", "123456789"));
     }
 
     @Test
     void PosicionUsuario(){
-        assertEquals( 0,Main.obtenerPosicionUsuario(ListaUsuarios, "Javier", "987654321"));
-        assertEquals( 1,Main.obtenerPosicionUsuario(ListaUsuarios, "Klima", "135792468"));
+        Assertions.assertEquals( 0, Main.obtenerPosicionUsuario(ListaUsuarios, "Javier", "987654321"));
+        Assertions.assertEquals( 1, Main.obtenerPosicionUsuario(ListaUsuarios, "Klima", "135792468"));
     }
 
     @Test
