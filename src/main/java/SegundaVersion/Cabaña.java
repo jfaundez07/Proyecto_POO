@@ -9,27 +9,30 @@ public class Cabaña {
     private int habitaciones;
     private int baños;
     private boolean isOcupada;
-    private int arrendatario;
+    private Cliente arrendatario;
 
-    //COnstructores:
+    //Constructores:
 
-    public Cabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada, int arrendatario) {
+        //Este contructor es para instanciar el objeto a partir de un Json:
+    /*public Cabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada, Cliente arrendatario) {
         this.id = id;
         this.nombre = nombre;
         this.habitaciones = habitaciones;
         this.baños = baños;
         this.isOcupada = isOcupada;
         this.arrendatario = arrendatario;
+    }*/
+
+        //ESte contructor es para instanciar el objetos en la ejecucion del programa:
+    public Cabaña(int id, String nombre, int habitaciones, int baños) {
+        this.id = id;
+        this.nombre = nombre;
+        this.habitaciones = habitaciones;
+        this.baños = baños;
+        this.isOcupada = false;
+        this.arrendatario = null;
     }
 
-    public Cabaña() {
-        this.id = 0;
-        this.nombre = "";
-        this.habitaciones = 0;
-        this.baños = 0;
-        this.isOcupada = false;
-        this.arrendatario = 0;
-    }
 
     //Metodos getter:
 
@@ -37,7 +40,7 @@ public class Cabaña {
         return id;
     }
 
-    public int getArrendatario() {
+    public Cliente getArrendatario() {
         return arrendatario;
     }
 
@@ -55,7 +58,7 @@ public class Cabaña {
         this.isOcupada = isOcupada;
     }
 
-    public void setArrendatario(int Arrendatario) {
+    public void setArrendatario(Cliente Arrendatario) {
         this.arrendatario = Arrendatario;
     }
 
