@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class GestorDeArchivos {
 
-
-
     private void crearCarpeta(String Nombre){
         File Carpeta = new File(Nombre);
         Carpeta.mkdirs();
@@ -75,6 +73,9 @@ public class GestorDeArchivos {
         for (File archivo : listaArchivos(carpeta)){
             if   (esArchivoJson(archivo)){
                 listaArchivosJson.add(leerArchivoJson(archivo.toString()));
+            }
+            else{
+                eliminarArchivo(archivo);
             }
         }
         return  listaArchivosJson;
