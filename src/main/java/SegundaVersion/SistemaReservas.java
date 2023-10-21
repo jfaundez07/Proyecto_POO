@@ -1,7 +1,6 @@
 package SegundaVersion;
 
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class SistemaReservas {
