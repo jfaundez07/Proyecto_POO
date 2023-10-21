@@ -25,7 +25,7 @@ public class SistemaReservas {
         return new Cliente(usuario, contraseña, celular);
     }
 
-    public Cabaña instanciarCabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada){
+    public Cabaña instanciarCabaña(int id, String nombre, int habitaciones, int baños){
         return new Cabaña(id, nombre, habitaciones, baños);
    }
 
