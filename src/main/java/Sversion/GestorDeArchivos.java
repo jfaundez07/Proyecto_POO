@@ -73,4 +73,54 @@ public class GestorDeArchivos {
         return  listaArchivosJson;
     }
 
+
+    //Usuario
+    public JSONObject crearNewAJSONUsuario(String Usuario, String Celular, String Contraseña) {
+        JSONObject usr = new JSONObject();
+        usr.put("Usuario", Usuario);
+        usr.put("Celular", Celular);
+        usr.put("Contraseña", Contraseña);
+        escribirArchivoJSON("Usuarios", Usuario, usr);
+        return usr;
+    }
+
+    public boolean usuarioExiste(String usuario) {
+        return archivoJsonExiste("Cliente", usuario + ".json");
+    }
+
+    public ArrayList<JSONObject> listaJsonCliente(){
+        return  listaArchivosJson("Cliente");
+    }
+
+    //Cabaña
+    public JSONObject crearNewAJsonCabaña(int id, String nombre, int habitaciones, int baños){
+        JSONObject cabaña = new JSONObject();
+        cabaña.put("Id", id);
+        cabaña.put("Nombre", nombre);
+        cabaña.put("Habitaciones", habitaciones);
+        cabaña.put("Baños", baños);
+        cabaña.put("isOcupada", false);
+        cabaña.put("Arrendatario", 0);
+        escribirArchivoJSON("Usuarios", Integer.toString(id), cabaña);
+        return cabaña;
+    }
+
+    public JSONObject modAJsonCabaña(int id, String nombre, int habitaciones,
+                                     int baños, Boolean estado, Cliente cliente){
+        JSONObject cabaña = new JSONObject();
+        cabaña.put("Id", id);
+        cabaña.put("Nombre", nombre);
+        cabaña.put("Habitaciones", habitaciones);
+        cabaña.put("Baños", baños);
+        cabaña.put("isOcupada", estado);
+        cabaña.put("Arrendatario", cliente);
+        escribirArchivoJSON("Usuarios", Integer.toString(id), cabaña);
+        return cabaña;
+    }
+
+    public ArrayList<JSONObject> listaJsonCabañas(){
+        return  listaArchivosJson("Cabañas");
+    }
+
+
 }
