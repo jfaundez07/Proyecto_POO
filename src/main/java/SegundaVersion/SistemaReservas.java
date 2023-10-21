@@ -11,21 +11,21 @@ public class SistemaReservas {
 
 
     //Metodos para instanciar los objetos, a partir de un Json:
-   private Cliente instanciarCliente (JSONObject archivoCliente) {
+   private Cliente instanciarClienteJson (JSONObject archivoCliente) {
        return new Cliente(archivoCliente.getString("Usuario"), archivoCliente.getString("Contraseña"), archivoCliente.getInt("Celular"));
    }
 
-   /*private Cabaña instanciarCabaña (JSONObject archivoCabaña) {
+   /*private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
        return new Cabaña(archivoCabaña.getInt("Id"), archivoCabaña.getString("Nombre"), archivoCabaña.getInt("Habitaciones"), archivoCabaña.getInt("Baños"), archivoCabaña.getBoolean("isOcupada"));
    }*/
 
 
    //Metodos para instanciar los objetos en la ejecucion del programa:
-    public Cliente crearCliente(String usuario, String contraseña, int celular){
+    public Cliente instanciarCliente(String usuario, String contraseña, int celular){
         return new Cliente(usuario, contraseña, celular);
     }
 
-    public Cabaña crearCabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada){
+    public Cabaña instanciarCabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada){
         return new Cabaña(id, nombre, habitaciones, baños);
    }
 
