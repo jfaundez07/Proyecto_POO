@@ -1,9 +1,10 @@
 package SegundaVersion;
 
-import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SistemaReservas {
-    private ArrayList<JSONObject> listaUsuarios = new ArrayList<>();
-    private ArrayList<JSONObject> listaCabañas = new ArrayList<>();
+
+    //Listas para almacenar los datos de los usuarios y las cabañas en formato de sus respectivas Clases:
+    private ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private ArrayList<Cabaña> listaCabañas = new ArrayList<>();
 }
