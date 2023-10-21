@@ -121,6 +121,6 @@ public class GestorDeArchivos {
     public ArrayList<JSONObject> listaJsonCabañas(){
         return  listaArchivosJson("Cabañas");
     }
-
+//
 
 }
