@@ -7,16 +7,16 @@ public class GestorDeArchivos {
 
 
 
-    public void crearCarpeta(String Nombre){
+    private void crearCarpeta(String Nombre){
         File Carpeta = new File(Nombre);
         Carpeta.mkdirs();
     }
 
-    public void eliminarArchivo(File file){
+    private void eliminarArchivo(File file){
         file.delete();
     }
 
-    public File[] listaArchivos(String carpeta){
+    private File[] listaArchivos(String carpeta){
         crearCarpeta(carpeta);
         File Carpeta = new File(carpeta);
         return Carpeta.listFiles();
@@ -30,15 +30,18 @@ public class GestorDeArchivos {
 
     //Archivos Json
 
+    //Metodo que verifica que un archivo sea .json
     public Boolean esArchivoJson(File ruta) {
         return getExtension(ruta).equals(".json");
     }
 
+    //Metodo que verifica si existe un .json en especifico
     public Boolean archivoJsonExiste(String carpeta, String archivo){
         File Archivo = new File(carpeta + File.separator + archivo + ".json");
         return Archivo.exists();
     }
 
+    //Metodo que toma un .json (si no existe crea el .json) y sobreescribe en su interior el contenido de un objeto json
     public void escribirArchivoJSON(String carpeta, String Nombre, JSONObject json){
         crearCarpeta(carpeta);
 
@@ -50,6 +53,7 @@ public class GestorDeArchivos {
         }
     }
 
+    //Metodo que toma un archivo .json y regresa un objeto json
     public JSONObject leerArchivoJson(String ruta){
         BufferedReader Lector;
         JSONObject Contenido = new JSONObject();
@@ -65,6 +69,7 @@ public class GestorDeArchivos {
         return Contenido;
     }
 
+    // Metodo que regresa una lista de jsons con todos los archivos .json dentro de una carpeta
     public ArrayList<JSONObject> listaArchivosJson(String carpeta) {
         ArrayList<JSONObject> listaArchivosJson = new ArrayList<>();
         for (File archivo : listaArchivos(carpeta)){
@@ -77,16 +82,20 @@ public class GestorDeArchivos {
 
 
     //Usuario
+
+    //   Metodo que verifica si un .json con el nombre del usuario existe
     public Boolean usuarioExiste(String usuario) {
-        return archivoJsonExiste("Cliente", usuario + ".json");
+        return archivoJsonExiste("Cliente", usuario);
     }
 
+    //   Metodo que regresa todos los usuarios dentro de una carpeta como un array de jsons
     public ArrayList<JSONObject> listaJsonCliente(){
         return  listaArchivosJson("Cliente");
     }
 
     //Cabaña
 
+    //   Metodo que regresa todos los cabañas dentro de una carpeta como un array de jsons
     public ArrayList<JSONObject> listaJsonCabañas(){
         return  listaArchivosJson("Cabañas");
     }
