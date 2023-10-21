@@ -4,67 +4,71 @@ public class Cabaña {
 
     //Atributos:
 
-        private int id;
-        private String nombre;
-        private int habitaciones;
-        private int baños;
-        private boolean isOcupada;
-        private int arrendatario;
+    private int id;
+    private String nombre;
+    private int habitaciones;
+    private int baños;
+    private boolean isOcupada;
+    private int arrendatario;
 
-        public Cabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada, int arrendatario) {
-            this.id = id;
-            this.nombre = nombre;
-            this.habitaciones = habitaciones;
-            this.baños = baños;
-            this.isOcupada = isOcupada;
-            this.arrendatario = arrendatario;
-        }
+    //COnstructores:
 
-        public Cabaña() {
-            this.id = 0;
-            this.nombre = "";
-            this.habitaciones = 0;
-            this.baños = 0;
-            this.isOcupada = false;
-            this.arrendatario = 0;
-        }
+    public Cabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada, int arrendatario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.habitaciones = habitaciones;
+        this.baños = baños;
+        this.isOcupada = isOcupada;
+        this.arrendatario = arrendatario;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public Cabaña() {
+        this.id = 0;
+        this.nombre = "";
+        this.habitaciones = 0;
+        this.baños = 0;
+        this.isOcupada = false;
+        this.arrendatario = 0;
+    }
 
-        public String getNombre() {
-            return nombre;
-        }
+    //Metodos getter:
 
-        public void setNombre(String Nombre) {
-            this.nombre = Nombre;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public boolean isOcupada() {
-            return isOcupada;
-        }
+    public int getArrendatario() {
+        return arrendatario;
+    }
 
-        public void setIsOcupada(boolean isOcupada) {
-            this.isOcupada = isOcupada;
-        }
+    public boolean getIsOcupada() {
+        return isOcupada;
+    }
 
-        public int getArrendatario() {
-            return arrendatario;
-        }
+    //Metodos setter:
 
-        public void setArrendatario(int Arrendatario) {
-            this.arrendatario = Arrendatario;
-        }
+    public void setNombre(String Nombre) {
+        this.nombre = Nombre;
+    }
 
-        public void mostrarCabaña() {
+    public void setIsOcupada(boolean isOcupada) {
+        this.isOcupada = isOcupada;
+    }
 
-            System.out.println();
-            System.out.println("Id: " + this.id);
-            System.out.println("Nombre: " + this.nombre);
-            System.out.println("Cantidad de habitaciones: " + this.habitaciones);
-            System.out.println("Cantidad de baños: " + this.baños);
-            System.out.println("Esta ocupada: " + this.isOcupada);
-        }
+    public void setArrendatario(int Arrendatario) {
+        this.arrendatario = Arrendatario;
+    }
+
+    //Metodos de la clase:
+
+    public void mostrarCabaña() {
+
+        System.out.println();
+        System.out.println("Id: " + this.id);
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Cantidad de habitaciones: " + this.habitaciones);
+        System.out.println("Cantidad de baños: " + this.baños);
+        System.out.println("Esta ocupada: " + this.isOcupada);
+    }
 
 }
