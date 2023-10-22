@@ -8,34 +8,7 @@ import java.util.Scanner;
 public class Menu {
     public static Scanner leer = new Scanner(System.in);
 
-    //METODOS MENU
-    public void opcionesMenu(Cliente usuarioIngresado) {
-        System.out.println("\nMenu Cabañas. Usuario: " + usuarioIngresado.getUsuario());
-        System.out.println("[0] Salir\n[1] Mostrar Cabañas existentes\n[2] Reservar Cabaña\n[3] Ver Mis Cabañas Reservadas\n[4] Realizar Check-Out\nQue desea hacer?: ");
-    }
-
-    public void menu(ArrayList<Cabaña> listaCabañas, ArrayList<Cliente> listaClientes, SistemaReservas sistemaReservas) {
-
-        Cliente clienteIngresado = listaClientes.get(sistemaReservas.loginUsario());
-
-        String seleccion;
-
-        do {
-            opcionesMenu(clienteIngresado);
-            seleccion = leer.nextLine();
-
-            switch (seleccion) {
-
-                /*case "1" ->
-                case "2" ->
-                case "3" ->
-                case "4" ->*/
-
-            }
-
-        } while (!seleccion.equals("0"));
-
-    }
+    //METODOS MENU BIENVENIDA
 
     public void OpcionesMenuBienvenida() {
         System.out.println("\nBienvenido a R.A \nElija una opcion:");
@@ -59,5 +32,43 @@ public class Menu {
         } while (!Seleccion.equals("0"));
     }
 
+    //METODOS MENU PRINCIPAL
+    public void opcionesMenu(Cliente usuarioIngresado) {
+        System.out.println("\nMenu Cabañas. Usuario: " + usuarioIngresado.getUsuario());
+        System.out.println("[0] Salir\n[1] Mostrar Cabañas existentes\n[2] Reservar Cabaña\n[3] Ver Mis Cabañas Reservadas\n[4] Realizar Check-Out\nQue desea hacer?: ");
+    }
+
+    public void menu(Cliente usr) {
+
+        String seleccion;
+
+        do {
+            opcionesMenu(usr);
+            seleccion = leer.nextLine();
+
+            switch (seleccion) {
+
+                case "1" -> mostrarCabañasExistentes(new SistemaReservas().getListaCabañas());
+                /*case "2" -> reservarCabaña(usuarioIngresado, listCabañas);
+                case "3" -> mostrarCabañasReservadas(usuarioIngresado, listCabañas);
+                case "4" -> checkOutCabaña(usuarioIngresado, listCabañas);*/
+
+            }
+
+        } while (!seleccion.equals("0"));
+
+    }
+
+    //Caracteristicas Menu
+    public void mostrarCabañasExistentes(ArrayList<Cabaña> listCabañas) {
+
+        System.out.println("\nCabañas existentes: ");
+
+        for (Cabaña cabaña : listCabañas) {
+
+            cabaña.mostrarCabaña();
+
+        }
+    }
 
 }

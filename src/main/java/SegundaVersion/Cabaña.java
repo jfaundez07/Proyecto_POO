@@ -41,6 +41,18 @@ public class Cabaña {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getHabitaciones() {
+        return habitaciones;
+    }
+
+    public int getBaños() {
+        return baños;
+    }
+
     public Cliente getArrendatario() {
         return arrendatario;
     }

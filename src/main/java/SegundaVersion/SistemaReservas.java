@@ -48,14 +48,14 @@ public class SistemaReservas {
 
    private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
        if (archivoCabaña.has("arrendatario")){
-       int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatario"));
-       return new Cabaña(
-               archivoCabaña.getInt("id"),
-               archivoCabaña.getString("nombre"),
-               archivoCabaña.getInt("habitaciones"),
-               archivoCabaña.getInt("baños"),
-               archivoCabaña.getBoolean("isOcupada"),
-               listaClientes.get(pos));
+           int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatario"));
+           return new Cabaña(
+                   archivoCabaña.getInt("id"),
+                   archivoCabaña.getString("nombre"),
+                   archivoCabaña.getInt("habitaciones"),
+                   archivoCabaña.getInt("baños"),
+                   archivoCabaña.getBoolean("isOcupada"),
+                   listaClientes.get(pos));
        }
        return new Cabaña(
                archivoCabaña.getInt("id"),
@@ -93,9 +93,10 @@ public class SistemaReservas {
         new GestorDeArchivos().escribirArchivoJSON("cabaña", Integer.toString(cabaña2.getId()), cabaña2.toJson());
     }
 
-    public int loginUsario() {
+    public void loginUsario() {
 
         int posicion;
+        String usuario;
 
         boolean validar = false;
 
@@ -104,7 +105,7 @@ public class SistemaReservas {
             System.out.println("\nA continuacion ingrese los datos solicitados");
 
             System.out.println("Ingrese su nombre previamente registrado: ");
-            String usuario = lecturaString();
+            usuario = lecturaString();
 
             System.out.println("Ingrese su contraseña");
             String contraseña = lecturaString();
@@ -119,7 +120,7 @@ public class SistemaReservas {
 
         } while (!validar);
 
-        return posicion;
+        new Menu().menu(new SistemaReservas().getListaClientes().get(posicion));
 
     }
 
