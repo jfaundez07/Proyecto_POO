@@ -12,6 +12,10 @@ public class SistemaReservas {
 
     public static Scanner leer = new Scanner(System.in);
 
+    public ArrayList<Cliente> getListaClientes(){
+        return this.listaClientes;
+    }
+
     //Metodos para instanciar los objetos, a partir de un Json:
     private Cliente instanciarClienteJson (JSONObject archivoCliente) {
         return new Cliente(archivoCliente.getString("Usuario"), archivoCliente.getString("Contraseña"), archivoCliente.getInt("Celular"));
@@ -36,14 +40,14 @@ public class SistemaReservas {
         listaClientes.add(Joaquin);
     }
 
-    public void rellenarJsonCabañas(){
+    public void rellenarListaCabañas(){
         Cabaña cabaña1 = new Cabaña(1,"Cabaña 1",2,1,false,null);
         Cabaña cabaña2 = new Cabaña(2,"Cabaña 2",3,2,false,null);
         listaCabañas.add(cabaña1);
         listaCabañas.add(cabaña2);
     }
 
-    public int LoginUsario(ArrayList<Cliente> listaClientes) {
+    public int loginUsario(ArrayList<Cliente> listaClientes) {
 
         int posicion;
 
