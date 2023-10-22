@@ -45,7 +45,6 @@ public class Menu {
     public void MenuBienvenida() {
         SistemaReservas sistemaReservas = new SistemaReservas();
         sistemaReservas.rellenarListaCabañas();
-        sistemaReservas.rellenarListaClientesPorDefecto();
 
         String Seleccion;
 
@@ -55,7 +54,7 @@ public class Menu {
 
             switch (Seleccion){
                 case "1" -> sistemaReservas.loginUsario();
-                case "2" -> sistemaReservas.menuSingUP();
+                case "2" -> sistemaReservas.singUP();
             }
 
         } while (!Seleccion.equals("0"));

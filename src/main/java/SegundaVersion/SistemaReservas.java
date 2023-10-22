@@ -1,13 +1,11 @@
 package SegundaVersion;
-
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SistemaReservas {
 
     //Listas para almacenar los datos en formato de sus respectivas Clases:
-    private ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private ArrayList<Cliente> listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
     private ArrayList<Cabaña> listaCabañas = new ArrayList<>();
 
     private String lecturaString(){
@@ -26,20 +24,23 @@ public class SistemaReservas {
 
     //Metodos para instanciar los objetos, a partir de un Json:
     private Cliente instanciarClienteJson (JSONObject archivoCliente) {
-        return new Cliente(archivoCliente.getString("Usuario"), archivoCliente.getString("Contraseña"), archivoCliente.getInt("Celular"));
+        return new Cliente(archivoCliente.getString("usuario"), archivoCliente.getString("contraseña"), archivoCliente.getInt("celular"));
     }
+
+    // genera una lista de clientes a partir de una lista de archivos json
+    private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
+        ArrayList<Cliente> newListClientes = new ArrayList<>();
+        for (JSONObject cliente : clientes){
+            newListClientes.add(instanciarClienteJson(cliente));
+        }
+        return newListClientes;
+    }
+
 
    /*private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
        return new Cabaña(archivoCabaña.getInt("Id"), archivoCabaña.getString("Nombre"), archivoCabaña.getInt("Habitaciones"), archivoCabaña.getInt("Baños"), archivoCabaña.getBoolean("isOcupada"));
    }*/
 
-
-    public void setListaClientes(){
-
-    }
-
-
-    //Metodos para almacenar el objeto en la lista de objetos:
 
     public void rellenarListaClientesPorDefecto(){
         Cliente Javier = new Cliente("Javier","1234",994484766);
@@ -115,7 +116,7 @@ public class SistemaReservas {
         return posicion;
     }
 
-    public void menuSingUP(){
+    public void singUP(){
 
         String Usuario;
         int Celular = 0;
