@@ -32,7 +32,6 @@ public class Cabaña {
         this.habitaciones = habitaciones;
         this.baños = baños;
         this.isOcupada = false;
-        this.arrendatario = null;
     }
 
 
@@ -84,9 +83,7 @@ public class Cabaña {
         json.put("habitacione", this.habitaciones);
         json.put("baños", this.baños);
         json.put("isOcupada", this.isOcupada);
-        if (this.arrendatario == null) {
-            json.put("arrendatarios", (Object) null);}
-        else{
+        if (this.arrendatario != null) {
             json.put("arrendatarios", this.arrendatario.getUsuario());}
         return json;
     }

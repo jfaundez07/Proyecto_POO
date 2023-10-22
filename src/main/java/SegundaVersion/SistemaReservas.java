@@ -5,8 +5,13 @@ import java.util.ArrayList;
 public class SistemaReservas {
 
     //Listas para almacenar los datos en formato de sus respectivas Clases:
-    private ArrayList<Cliente> listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
-    private ArrayList<Cabaña> listaCabañas = new ArrayList<>();
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Cabaña> listaCabañas;
+
+    public SistemaReservas(){
+        listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
+        listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
+    }
 
     private String lecturaString(){
         java.util.Scanner leer = new java.util.Scanner(System.in);
@@ -20,6 +25,10 @@ public class SistemaReservas {
 
     public ArrayList<Cliente> getListaClientes(){
         return this.listaClientes;
+    }
+
+    public ArrayList<Cabaña> getListaCabañas() {
+        return listaCabañas;
     }
 
     //Metodos para instanciar los objetos, a partir de un Json:
@@ -37,10 +46,31 @@ public class SistemaReservas {
     }
 
 
-   /*private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
-       return new Cabaña(archivoCabaña.getInt("Id"), archivoCabaña.getString("Nombre"), archivoCabaña.getInt("Habitaciones"), archivoCabaña.getInt("Baños"), archivoCabaña.getBoolean("isOcupada"));
-   }*/
+   private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
+       if (archivoCabaña.has("arrendatario")){
+       int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatario"));
+       return new Cabaña(
+               archivoCabaña.getInt("id"),
+               archivoCabaña.getString("nombre"),
+               archivoCabaña.getInt("habitaciones"),
+               archivoCabaña.getInt("baños"),
+               archivoCabaña.getBoolean("isOcupada"),
+               listaClientes.get(pos));
+       }
+       return new Cabaña(
+               archivoCabaña.getInt("id"),
+               archivoCabaña.getString("nombre"),
+               archivoCabaña.getInt("habitaciones"),
+               archivoCabaña.getInt("baños"));
+    }
 
+   private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
+        ArrayList<Cabaña> newListCabaña = new ArrayList<>();
+        for (JSONObject cabaña : cabañas){
+            newListCabaña.add(instanciarCabañaJson(cabaña));
+        }
+        return newListCabaña;
+   }
 
     public void rellenarListaClientesPorDefecto(){
         Cliente Javier = new Cliente("Javier","1234",994484766);
@@ -59,6 +89,8 @@ public class SistemaReservas {
         Cabaña cabaña2 = new Cabaña(2,"Cabaña 2",3,2,false,null);
         listaCabañas.add(cabaña1);
         listaCabañas.add(cabaña2);
+        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña1.getId()), cabaña1.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("cabaña", Integer.toString(cabaña2.getId()), cabaña2.toJson());
     }
 
     public int loginUsario() {
@@ -80,7 +112,7 @@ public class SistemaReservas {
             posicion = 0;
 
             if (validarUsuario(listaClientes, usuario, contraseña)) {
-                posicion = obtenerPosicionUsuario(listaClientes, usuario, contraseña);
+                posicion = obtenerPosicionUsuario(listaClientes, usuario);
                 validar = true;
             }
 
@@ -104,12 +136,12 @@ public class SistemaReservas {
         return false;
     }
 
-    public int obtenerPosicionUsuario(ArrayList<Cliente> listaUsuarios, String Usuario, String Contraseña) {
+    public int obtenerPosicionUsuario(ArrayList<Cliente> listaUsuarios, String Usuario) {
 
-        int posicion = 0;
+        int posicion = -1;
 
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            if ((listaUsuarios.get(i)).getUsuario().equals(Usuario) && (listaUsuarios.get(i)).getContraseña().equals(Contraseña)) {
+            if ((listaUsuarios.get(i)).getUsuario().equals(Usuario)) {
                 posicion = i;
             }
         }

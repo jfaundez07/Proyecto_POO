@@ -44,7 +44,6 @@ public class Menu {
 
     public void MenuBienvenida() {
         SistemaReservas sistemaReservas = new SistemaReservas();
-        sistemaReservas.rellenarListaCabañas();
 
         String Seleccion;
 
