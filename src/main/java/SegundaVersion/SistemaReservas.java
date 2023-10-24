@@ -1,14 +1,17 @@
 package SegundaVersion;
-
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SistemaReservas {
 
     //Listas para almacenar los datos en formato de sus respectivas Clases:
-    private ArrayList<Cliente> listaClientes = new ArrayList<>();
-    private ArrayList<Cabaña> listaCabañas = new ArrayList<>();
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Cabaña> listaCabañas;
+
+    public SistemaReservas(){
+        listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
+        listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
+    }
 
     private String lecturaString(){
         java.util.Scanner leer = new java.util.Scanner(System.in);
@@ -24,29 +27,61 @@ public class SistemaReservas {
         return this.listaClientes;
     }
 
-    //Metodos para instanciar los objetos, a partir de un Json:
-    private Cliente instanciarClienteJson (JSONObject archivoCliente) {
-        return new Cliente(archivoCliente.getString("Usuario"), archivoCliente.getString("Contraseña"), archivoCliente.getInt("Celular"));
-    }
-
-   /*private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
-       return new Cabaña(archivoCabaña.getInt("Id"), archivoCabaña.getString("Nombre"), archivoCabaña.getInt("Habitaciones"), archivoCabaña.getInt("Baños"), archivoCabaña.getBoolean("isOcupada"));
-   }*/
-
-
-    public void setListaClientes(){
-
-    }
     public ArrayList<Cabaña> getListaCabañas() {
         return listaCabañas;
     }
-    //Metodos para almacenar el objeto en la lista de objetos:
+
+    //Metodos para instanciar los objetos, a partir de un Json:
+    private Cliente instanciarClienteJson (JSONObject archivoCliente) {
+        return new Cliente(archivoCliente.getString("usuario"), archivoCliente.getString("contraseña"), archivoCliente.getInt("celular"));
+    }
+
+    // genera una lista de clientes a partir de una lista de archivos json
+    private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
+        ArrayList<Cliente> newListClientes = new ArrayList<>();
+        for (JSONObject cliente : clientes){
+            newListClientes.add(instanciarClienteJson(cliente));
+        }
+        return newListClientes;
+    }
+
+
+    private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
+        if (archivoCabaña.getBoolean("isOcupada")){
+            int pos = obtenerPosicionUsuario(archivoCabaña.getString("arrendatarios"));
+            return new Cabaña(
+                    archivoCabaña.getInt("id"),
+                    archivoCabaña.getString("nombre"),
+                    archivoCabaña.getInt("habitaciones"),
+                    archivoCabaña.getInt("baños"),
+                    archivoCabaña.getBoolean("isOcupada"),
+                    listaClientes.get(pos));
+        }
+        return new Cabaña(
+                archivoCabaña.getInt("id"),
+                archivoCabaña.getString("nombre"),
+                archivoCabaña.getInt("habitaciones"),
+                archivoCabaña.getInt("baños"));
+    }
+
+    private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
+        ArrayList<Cabaña> newListCabaña = new ArrayList<>();
+        for (JSONObject cabaña : cabañas){
+            newListCabaña.add(instanciarCabañaJson(cabaña));
+        }
+        return newListCabaña;
+    }
 
     public void rellenarListaClientesPorDefecto(){
-        Cliente Javier = new Cliente("Javier","1234",94484766);
-        Cliente Joaquin = new Cliente("Joaquin", "1234", 99999999);
+        Cliente Javier = new Cliente("Javier","1234",994484766);
+        Cliente Joaquin = new Cliente("Joaquin", "1234", 999999999);
+        Cliente Christian = new Cliente("Christian", "1111", 911111111);
         listaClientes.add(Javier);
         listaClientes.add(Joaquin);
+        listaClientes.add(Christian);
+        new GestorDeArchivos().escribirArchivoJSON("Cliente", Javier.getUsuario(), Javier.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("Cliente", Joaquin.getUsuario(), Joaquin.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("Cliente", Christian.getUsuario(), Christian.toJson());
     }
 
     public void rellenarListaCabañas(){
@@ -54,7 +89,10 @@ public class SistemaReservas {
         Cabaña cabaña2 = new Cabaña(2,"Cabaña 2",3,2,false,null);
         listaCabañas.add(cabaña1);
         listaCabañas.add(cabaña2);
+        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña1.getId()), cabaña1.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña2.getId()), cabaña2.toJson());
     }
+
 
     public void loginUsario() {
         int posicion;
