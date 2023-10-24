@@ -16,6 +16,9 @@ public class Menu {
 
     public void menuPrincipal(Cliente usuario) {
 
+        SistemaReservas sistemaReservas = new SistemaReservas();
+        sistemaReservas.leerTodo();
+
         String seleccion;
 
         do {
@@ -39,8 +42,8 @@ public class Menu {
 
     public void MenuBienvenida() {
         SistemaReservas sistemaReservas = new SistemaReservas();
-        sistemaReservas.rellenarListaCabañas();
-        sistemaReservas.rellenarListaClientesPorDefecto();
+        /*sistemaReservas.rellenarListaCabañas();
+        sistemaReservas.rellenarListaClientesPorDefecto();*/
 
         String Seleccion;
 
@@ -61,7 +64,6 @@ public class Menu {
             cabaña.mostrarCabaña();
         }
     }
-
     public void mostrarCabañasReservadas(Cliente usr) {
         int contador = 0;
         for (int i = 0; i < new SistemaReservas().getListaCabañas().size(); i++) {
@@ -74,7 +76,7 @@ public class Menu {
             }
         }
         if (contador == 0) {
-            System.out.println(usr.getUsuario() + "Aun no ha reservado ninguna cabaña.");
+            System.out.println(usr.getUsuario() + " Aun no ha reservado ninguna cabaña.");
         }
     }
 }

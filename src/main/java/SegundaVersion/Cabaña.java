@@ -81,7 +81,8 @@ public class Cabaña {
         if (!isOcupada) {
             setIsOcupada(true);
             setArrendatario(usr);
-            new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(id), toJson());
+            mostrarCabaña();
+            new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(id), toJson());
             System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
         } else{
             System.out.println("\nCabaña ocupada");

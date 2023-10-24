@@ -13,6 +13,11 @@ public class SistemaReservas {
         listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
     }
 
+    public void leerTodo(){
+        this.listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
+        this.listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
+    }
+
     private String lecturaString(){
         java.util.Scanner leer = new java.util.Scanner(System.in);
         return leer.nextLine();
@@ -28,23 +33,13 @@ public class SistemaReservas {
     }
 
     public ArrayList<Cabaña> getListaCabañas() {
-        return listaCabañas;
+        return this.listaCabañas;
     }
 
     //Metodos para instanciar los objetos, a partir de un Json:
     private Cliente instanciarClienteJson (JSONObject archivoCliente) {
         return new Cliente(archivoCliente.getString("usuario"), archivoCliente.getString("contraseña"), archivoCliente.getInt("celular"));
     }
-
-    // genera una lista de clientes a partir de una lista de archivos json
-    private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
-        ArrayList<Cliente> newListClientes = new ArrayList<>();
-        for (JSONObject cliente : clientes){
-            newListClientes.add(instanciarClienteJson(cliente));
-        }
-        return newListClientes;
-    }
-
 
     private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
         if (archivoCabaña.getBoolean("isOcupada")){
@@ -62,6 +57,19 @@ public class SistemaReservas {
                 archivoCabaña.getString("nombre"),
                 archivoCabaña.getInt("habitaciones"),
                 archivoCabaña.getInt("baños"));
+    }
+
+    // genera una lista de clientes a partir de una lista de archivos json
+    private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
+        ArrayList<Cliente> newListClientes = new ArrayList<>();
+        for (JSONObject cliente : clientes){
+            newListClientes.add(instanciarClienteJson(cliente));
+        }
+        return newListClientes;
+    }
+
+    public void ingresarCabañaReservada(int posicionCabaña){
+
     }
 
     private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
@@ -92,8 +100,6 @@ public class SistemaReservas {
         new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña1.getId()), cabaña1.toJson());
         new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña2.getId()), cabaña2.toJson());
     }
-
-
     public void loginUsario() {
         int posicion;
         String usuario;
@@ -138,7 +144,7 @@ public class SistemaReservas {
 
     public void menuReservarCabaña(Cliente usr){
         System.out.println("\nReserva de cabañas");
-        mostrarCabañasExistentes();
+        new Menu().mostrarCabañasExistentes();
         System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
         try{
             int elegirID = lecturaInt();
@@ -150,16 +156,6 @@ public class SistemaReservas {
         }catch (Exception e) {
             // manejar la excepción
             System.out.println("Opcion inválida");
-        }
-    }
-    public void mostrarCabañasExistentes() {
-
-        System.out.println("\nCabañas existentes: ");
-
-        for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
-
-            cabaña.mostrarCabaña();
-
         }
     }
     public void singUP(){

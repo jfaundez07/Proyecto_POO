@@ -16,9 +16,7 @@ public class Cliente {
         json.put("contraseña", this.contraseña);
         return json;
     }
-
     //Constructores:
-
     public Cliente(String usuario, String contraseña, int celular) {
         this.usuario = usuario;
         this.contraseña = contraseña;
