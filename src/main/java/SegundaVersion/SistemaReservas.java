@@ -56,38 +56,26 @@ public class SistemaReservas {
         listaCabañas.add(cabaña2);
     }
 
-    public int loginUsario() {
-
+    public void loginUsario() {
         int posicion;
-
+        String usuario;
         boolean validar = false;
-
         do {
-
             System.out.println("\nA continuacion ingrese los datos solicitados");
-
             System.out.println("Ingrese su nombre previamente registrado: ");
-            String usuario = lecturaString();
-
+            usuario = lecturaString();
             System.out.println("Ingrese su contraseña");
             String contraseña = lecturaString();
-
             posicion = 0;
-
-            if (validarUsuario(listaClientes, usuario, contraseña)) {
-                posicion = obtenerPosicionUsuario(listaClientes, usuario, contraseña);
+            if (validarUsuario(usuario, contraseña)) {
+                posicion = obtenerPosicionUsuario(usuario);
                 validar = true;
             }
-
-
         } while (!validar);
-
-        return posicion;
-
+        new Menu().menuPrincipal(listaClientes.get(posicion));
     }
 
-    public boolean validarUsuario(ArrayList<Cliente> listaClientes, String usuario, String contraseña) {
-
+    public boolean validarUsuario(String usuario, String contraseña) {
         for (int i = 0; i < listaClientes.size(); i++) {
 
             if ((listaClientes.get(i)).getUsuario().equals(usuario) && (listaClientes.get(i)).getContraseña().equals(contraseña)) {
@@ -95,38 +83,30 @@ public class SistemaReservas {
             }
         }
         System.out.println("Usuario y/o contraseña incorrecto");
-
         return false;
     }
 
-    public int obtenerPosicionUsuario(ArrayList<Cliente> listaUsuarios, String Usuario, String Contraseña) {
+    public int obtenerPosicionUsuario(String Usuario) {
 
-        int posicion = 0;
+        int posicion = -1;
 
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-            if ((listaUsuarios.get(i)).getUsuario().equals(Usuario) && (listaUsuarios.get(i)).getContraseña().equals(Contraseña)) {
+        for (int i = 0; i < this.listaClientes.size(); i++) {
+            if ((this.listaClientes.get(i)).getUsuario().equals(Usuario)) {
                 posicion = i;
             }
         }
         return posicion;
     }
 
-    public void reservarCabaña(Cliente usr){
+    public void menuReservarCabaña(Cliente usr){
         System.out.println("\nReserva de cabañas");
         mostrarCabañasExistentes();
         System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
         try{
             int elegirID = lecturaInt();
-            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+            for (Cabaña cabaña : this.listaCabañas) {
                 if (elegirID == cabaña.getId()) {
-                    if (!cabaña.getIsOcupada()) {
-                        cabaña.setIsOcupada(true);
-                        cabaña.setArrendatario(usr);
-                        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
-                        System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
-                    } else{
-                        System.out.println("\nCabaña ocupada");
-                    }
+                    cabaña.reservarCabaña(usr);
                 }
             }
         }catch (Exception e) {
@@ -145,15 +125,12 @@ public class SistemaReservas {
         }
     }
     public void singUP(){
-
         String Usuario;
         int Celular = 0;
         String Contraseña;
         String Contraseña2;
-
         System.out.println("Ingrese el nombre de su nuevo usuario");
         Usuario = lecturaString();
-
         do {
             System.out.println("Ingrese celular valido. (9 digitos, solo numeros)");
             try{
@@ -161,19 +138,13 @@ public class SistemaReservas {
             catch (Exception e){
                 System.out.println("Valores no validos");
             }
-
         } while (!(Integer.toString(Celular).length() == 9));
-
         do {
             System.out.println("Ingrese Contraseña");
             Contraseña = lecturaString();
-
             System.out.println("Confirme Contaseña");
             Contraseña2 = lecturaString();
-
         } while (!Contraseña.equals(Contraseña2));
-
-
         if (!new GestorDeArchivos().usuarioExiste(Usuario)) {
             this.listaClientes.add(new Cliente(Usuario, Contraseña, Celular));
             new GestorDeArchivos().escribirArchivoJSON("Cliente", Usuario, new Cliente(Usuario, Contraseña, Celular).toJson());
@@ -181,8 +152,23 @@ public class SistemaReservas {
         } else {
             System.out.println("Usuario ya existe.");
         }
+    }
+    public void menuCheckOutCabaña(Cliente usr){
+        System.out.println("\nCheck-Out Cabañas: ");
+        new Menu().mostrarCabañasReservadas(usr);
+        try{
+            System.out.println("\nIngrese la ID de la cabaña que desea hacer check-out ");
+            int elegirID = lecturaInt();
 
+            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+                if (elegirID == cabaña.getId()) {
+                    cabaña.checkOutCabaña(usr);
+                }
+            }
+        }catch (Exception e) {
+            // manejar la excepción
+            System.out.println("Opcion inválida");
+        }
     }
 }
 
-}

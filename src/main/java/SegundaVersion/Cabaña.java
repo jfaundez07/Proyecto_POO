@@ -77,6 +77,16 @@ public class Cabaña {
             json.put("arrendatarios", this.arrendatario.getUsuario());}
         return json;
     }
+    public void reservarCabaña(Cliente usr){
+        if (!isOcupada) {
+            setIsOcupada(true);
+            setArrendatario(usr);
+            new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(id), toJson());
+            System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
+        } else{
+            System.out.println("\nCabaña ocupada");
+        }
+    }
 
     public void mostrarCabaña() {
 
@@ -86,6 +96,14 @@ public class Cabaña {
         System.out.println("Cantidad de habitaciones: " + this.habitaciones);
         System.out.println("Cantidad de baños: " + this.baños);
         System.out.println("Esta ocupada: " + this.isOcupada);
+    }
+    public void checkOutCabaña(Cliente usr){
+        if (this.isOcupada) {
+            setIsOcupada(false);
+            setArrendatario(null);
+            new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(getId()), toJson());
+            System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
+        }
     }
 
 
