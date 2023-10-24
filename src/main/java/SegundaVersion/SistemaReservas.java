@@ -8,25 +8,14 @@ public class SistemaReservas {
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Cabaña> listaCabañas;
 
-    public SistemaReservas(){
+    public void generarClientes(){
         listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
+    }
+
+    public void generarCabañas(){
         listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
     }
 
-    public void leerTodo(){
-        this.listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
-        this.listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
-    }
-
-    private String lecturaString(){
-        java.util.Scanner leer = new java.util.Scanner(System.in);
-        return leer.nextLine();
-    }
-
-    private int lecturaInt(){
-        java.util.Scanner leer = new java.util.Scanner(System.in);
-        return leer.nextInt();
-    }
 
     public ArrayList<Cliente> getListaClientes(){
         return this.listaClientes;
@@ -68,10 +57,6 @@ public class SistemaReservas {
         return newListClientes;
     }
 
-    public void ingresarCabañaReservada(int posicionCabaña){
-
-    }
-
     private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
         ArrayList<Cabaña> newListCabaña = new ArrayList<>();
         for (JSONObject cabaña : cabañas){
@@ -80,26 +65,6 @@ public class SistemaReservas {
         return newListCabaña;
     }
 
-    public void rellenarListaClientesPorDefecto(){
-        Cliente Javier = new Cliente("Javier","1234",994484766);
-        Cliente Joaquin = new Cliente("Joaquin", "1234", 999999999);
-        Cliente Christian = new Cliente("Christian", "1111", 911111111);
-        listaClientes.add(Javier);
-        listaClientes.add(Joaquin);
-        listaClientes.add(Christian);
-        new GestorDeArchivos().escribirArchivoJSON("Cliente", Javier.getUsuario(), Javier.toJson());
-        new GestorDeArchivos().escribirArchivoJSON("Cliente", Joaquin.getUsuario(), Joaquin.toJson());
-        new GestorDeArchivos().escribirArchivoJSON("Cliente", Christian.getUsuario(), Christian.toJson());
-    }
-
-    public void rellenarListaCabañas(){
-        Cabaña cabaña1 = new Cabaña(1,"Cabaña 1",2,1,false,null);
-        Cabaña cabaña2 = new Cabaña(2,"Cabaña 2",3,2,false,null);
-        listaCabañas.add(cabaña1);
-        listaCabañas.add(cabaña2);
-        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña1.getId()), cabaña1.toJson());
-        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña2.getId()), cabaña2.toJson());
-    }
     public void loginUsario() {
         int posicion;
         String usuario;
@@ -144,7 +109,7 @@ public class SistemaReservas {
 
     public void menuReservarCabaña(Cliente usr){
         System.out.println("\nReserva de cabañas");
-        new Menu().mostrarCabañasExistentes();
+        mostrarCabañasExistentes();
         System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
         try{
             int elegirID = lecturaInt();
@@ -189,13 +154,13 @@ public class SistemaReservas {
     }
     public void menuCheckOutCabaña(Cliente usr){
         System.out.println("\nCheck-Out Cabañas: ");
-        new Menu().mostrarCabañasReservadas(usr);
+        mostrarCabañasReservadas(usr);
         try{
             System.out.println("\nIngrese la ID de la cabaña que desea hacer check-out ");
             int elegirID = lecturaInt();
 
-            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
-                if (elegirID == cabaña.getId()) {
+            for (Cabaña cabaña : listaCabañas) {
+                if ( elegirID == cabaña.getId()  ) {
                     cabaña.checkOutCabaña(usr);
                 }
             }
@@ -203,6 +168,39 @@ public class SistemaReservas {
             // manejar la excepción
             System.out.println("Opcion inválida");
         }
+    }
+
+    public void mostrarCabañasExistentes() {
+        System.out.println("\nCabañas existentes: ");
+        for (Cabaña cabaña : this.listaCabañas) {
+            cabaña.mostrarCabaña();
+        }
+    }
+
+    public void mostrarCabañasReservadas(Cliente usr) {
+        int contador = 0;
+        for (int i = 0; i < this.listaCabañas.size(); i++) {
+            try{
+                if (this.listaCabañas.get(i).getArrendatario().getUsuario().equals(usr.getUsuario())){
+                    contador += 1;
+                    this.listaCabañas.get(i).mostrarCabaña();
+                }
+            } catch (NullPointerException error){
+            }
+        }
+        if (contador == 0) {
+            System.out.println(usr.getUsuario() + " Aun no ha reservado ninguna cabaña.");
+        }
+    }
+
+    private String lecturaString(){
+        java.util.Scanner leer = new java.util.Scanner(System.in);
+        return leer.nextLine();
+    }
+
+    private int lecturaInt(){
+        java.util.Scanner leer = new java.util.Scanner(System.in);
+        return leer.nextInt();
     }
 }
 

@@ -28,21 +28,17 @@ public class Cliente {
     public String getUsuario() {
         return usuario;
     }
-
     public int getCelular() {
         return celular;
     }
 
     //Metodos setter:
-
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
     public void setCelular(int celular) {
         this.celular = celular;
     }
-
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }

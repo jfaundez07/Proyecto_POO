@@ -13,8 +13,6 @@ public class Cabaña {
     private boolean isOcupada;
     private Cliente arrendatario;
 
-    //Constructores:
-
     //Este contructor es para instanciar el objeto a partir de un Json:
     public Cabaña(int id, String nombre, int habitaciones, int baños, boolean isOcupada, Cliente arrendatario) {
         this.id = id;
@@ -37,35 +35,28 @@ public class Cabaña {
 
 
     //Metodos getter:
-
     public int getId() {
         return id;
     }
-
     public Cliente getArrendatario() {
         return arrendatario;
     }
-
     public boolean getIsOcupada() {
         return isOcupada;
     }
 
     //Metodos setter:
-
     public void setNombre(String Nombre) {
         this.nombre = Nombre;
     }
-
     public void setIsOcupada(boolean isOcupada) {
         this.isOcupada = isOcupada;
     }
-
     public void setArrendatario(Cliente Arrendatario) {
         this.arrendatario = Arrendatario;
     }
 
     //Metodos de la clase:
-
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
         json.put("id" , this.id);
@@ -77,12 +68,12 @@ public class Cabaña {
             json.put("arrendatarios", this.arrendatario.getUsuario());}
         return json;
     }
+
     public void reservarCabaña(Cliente usr){
         if (!isOcupada) {
             setIsOcupada(true);
             setArrendatario(usr);
             mostrarCabaña();
-            new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(id), toJson());
             System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
         } else{
             System.out.println("\nCabaña ocupada");
@@ -106,7 +97,6 @@ public class Cabaña {
         if (this.isOcupada) {
             setIsOcupada(false);
             setArrendatario(null);
-            new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(getId()), toJson());
             System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
         }
     }
