@@ -92,7 +92,7 @@ public class Cabaña {
         JSONObject json = new JSONObject();
         json.put("id" , this.id);
         json.put("nombre", this.nombre);
-        json.put("habitacione", this.habitaciones);
+        json.put("habitaciones", this.habitaciones);
         json.put("baños", this.baños);
         json.put("isOcupada", this.isOcupada);
         if (this.arrendatario != null) {

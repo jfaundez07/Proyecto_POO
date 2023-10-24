@@ -42,7 +42,7 @@ class GestorDeArchivosTest {
 
     @Test
     void testEsArchivoJson() {
-        File archivo = new File("prueba.json");
+        File archivo = new File("archivoPrueba.json");
         assertTrue(gestor.esArchivoJson(archivo));
     }
 

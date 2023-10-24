@@ -48,10 +48,10 @@ public class Menu {
 
             switch (seleccion) {
 
-                case "1" -> mostrarCabañasExistentes(new SistemaReservas().getListaCabañas());
-                /*case "2" -> reservarCabaña(usuarioIngresado, listCabañas);
-                case "3" -> mostrarCabañasReservadas(usuarioIngresado, listCabañas);
-                case "4" -> checkOutCabaña(usuarioIngresado, listCabañas);*/
+                case "1" -> mostrarCabañasExistentes();
+                case "2" -> reservarCabaña(usr);
+                case "3" -> mostrarCabañasReservadas(usr);
+                case "4" -> checkOutCabaña(usr);
 
             }
 
@@ -60,15 +60,101 @@ public class Menu {
     }
 
     //Caracteristicas Menu
-    public void mostrarCabañasExistentes(ArrayList<Cabaña> listCabañas) {
+    public void mostrarCabañasExistentes() {
 
         System.out.println("\nCabañas existentes: ");
 
-        for (Cabaña cabaña : listCabañas) {
+        for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
 
             cabaña.mostrarCabaña();
 
         }
     }
 
+    public void reservarCabaña(Cliente usr){
+
+        System.out.println("\nReserva de cabañas");
+
+        mostrarCabañasExistentes();
+
+        try{ System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
+            int elegirID = leer.nextInt();
+
+            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+
+                if (idExiste(elegirID, cabaña)) {
+
+                    if (!cabaña.getIsOcupada()) {
+
+                        cabaña.setIsOcupada(true);
+                        cabaña.setArrendatario(usr);
+                        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
+
+                        System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
+                    } else{
+                        System.out.println("\nCabaña ocupada");
+                    }
+                }
+            }
+        }catch (Exception e) {
+            // manejar la excepción
+            System.out.println("Opcion inválida");
+        }
+
+    }
+
+    public void mostrarCabañasReservadas(Cliente usr) {
+
+        int contador = 0;
+
+        for (int i = 0; i < new SistemaReservas().getListaCabañas().size(); i++) {
+
+            try{
+                if (new SistemaReservas().getListaCabañas().get(i).getArrendatario().getUsuario().equals(usr.getUsuario())){
+                    contador += 1;
+                    new SistemaReservas().getListaCabañas().get(i).mostrarCabaña();
+                }
+            } catch (NullPointerException error){
+
+            }
+        }
+
+        if (contador == 0) {
+            System.out.println(usr.getUsuario() + " aun no ha reservado ninguna cabaña.");
+        }
+    }
+
+    public void checkOutCabaña(Cliente usr){
+
+        System.out.println("\nCheck-Out Cabañas: ");
+
+        mostrarCabañasReservadas(usr);
+
+        try{
+            System.out.println("\nIngrese la ID de la cabaña que desea hacer check-out ");
+            int elegirID = leer.nextInt();
+
+            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+
+                if (idExiste(elegirID, cabaña)) {
+
+                    if (cabaña.getIsOcupada()) {
+
+                        cabaña.setIsOcupada(false);
+                        cabaña.setArrendatario(null);
+                        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
+
+                        System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
+                    }
+                }
+            }
+        }catch (Exception e) {
+            // manejar la excepción
+            System.out.println("Opcion inválida");
+        }
+    }
+
+    public boolean idExiste(int id, Cabaña cabañaSeleccionada) {
+        return id == cabañaSeleccionada.getId();
+    }
 }

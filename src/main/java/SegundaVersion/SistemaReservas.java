@@ -47,8 +47,8 @@ public class SistemaReservas {
 
 
    private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
-       if (archivoCabaña.has("arrendatario")){
-           int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatario"));
+       if (archivoCabaña.getBoolean("isOcupada")){
+           int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatarios"));
            return new Cabaña(
                    archivoCabaña.getInt("id"),
                    archivoCabaña.getString("nombre"),
