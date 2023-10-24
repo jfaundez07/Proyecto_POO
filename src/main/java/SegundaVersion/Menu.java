@@ -24,7 +24,7 @@ public class Menu {
         } while (!Seleccion.equals("0"));
     }
 
-    public void menuPrincipal(Cliente usuario, GestorDeCabañas instanciador) {;
+    public void menuPrincipal(Cliente usuario, GestorDeCabañas gestorDeCabañas) {;
 
         String seleccion;
 
@@ -33,10 +33,10 @@ public class Menu {
             seleccion = leer.nextLine();
             switch (seleccion) {
 
-                case "1" -> instanciador.mostrarCabañasExistentes();
-                case "2" -> instanciador.menuReservarCabaña(usuario);
-                case "3" -> instanciador.mostrarCabañasReservadas(usuario);
-                case "4" -> instanciador.menuCheckOutCabaña(usuario);
+                case "1" -> gestorDeCabañas.mostrarCabañasExistentes();
+                case "2" -> gestorDeCabañas.menuReservarCabaña(usuario);
+                case "3" -> gestorDeCabañas.mostrarCabañasReservadas(usuario);
+                case "4" -> gestorDeCabañas.menuCheckOutCabaña(usuario);
             }
         } while (!seleccion.equals("0"));
 
