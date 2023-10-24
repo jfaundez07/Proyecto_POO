@@ -82,21 +82,21 @@ public class GestorDeArchivos {
     }
 
 
-    //Usuario
+    //Usuario:
 
-    //   Metodo que verifica si un .json con el nombre del usuario existe
+    //Metodo que verifica si un .json con el nombre del usuario existe
     public Boolean usuarioExiste(String usuario) {
         return archivoJsonExiste("Cliente", usuario);
     }
 
-    //   Metodo que regresa todos los usuarios dentro de una carpeta como un array de jsons
+    //Metodo que regresa todos los usuarios dentro de una carpeta como un array de jsons
     public ArrayList<JSONObject> listaJsonCliente(){
         return  listaArchivosJson("Cliente");
     }
 
-    //Cabaña
+    //Cabaña:
 
-    //   Metodo que regresa todos los cabañas dentro de una carpeta como un array de jsons
+    //Metodo que regresa todos los cabañas dentro de una carpeta como un array de jsons
     public ArrayList<JSONObject> listaJsonCabañas(){
         return  listaArchivosJson("Cabañas");
     }

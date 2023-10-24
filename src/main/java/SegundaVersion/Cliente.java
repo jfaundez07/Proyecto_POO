@@ -9,13 +9,6 @@ public class Cliente {
     private String contraseña;
     private int celular;
 
-    public JSONObject toJson(){
-        JSONObject json = new JSONObject();
-        json.put("usuario" , this.usuario);
-        json.put("celular", this.celular);
-        json.put("contraseña", this.contraseña);
-        return json;
-    }
     //Constructores:
     public Cliente(String usuario, String contraseña, int celular) {
         this.usuario = usuario;
@@ -24,7 +17,6 @@ public class Cliente {
     }
 
     //Metodos getter:
-
     public String getUsuario() {
         return usuario;
     }
@@ -44,6 +36,14 @@ public class Cliente {
     }
     public String getContraseña(){
         return this.contraseña;
+    }
+
+    public JSONObject clienteToJson(){
+        JSONObject json = new JSONObject();
+        json.put("usuario" , this.usuario);
+        json.put("celular", this.celular);
+        json.put("contraseña", this.contraseña);
+        return json;
     }
 
 }

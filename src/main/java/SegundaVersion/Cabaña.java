@@ -57,17 +57,6 @@ public class Cabaña {
     }
 
     //Metodos de la clase:
-    public JSONObject toJson(){
-        JSONObject json = new JSONObject();
-        json.put("id" , this.id);
-        json.put("nombre", this.nombre);
-        json.put("habitaciones", this.habitaciones);
-        json.put("baños", this.baños);
-        json.put("isOcupada", this.isOcupada);
-        if (this.arrendatario != null) {
-            json.put("arrendatarios", this.arrendatario.getUsuario());}
-        return json;
-    }
 
     public void reservarCabaña(Cliente usr){
         if (!isOcupada) {
@@ -99,5 +88,17 @@ public class Cabaña {
             setArrendatario(null);
             System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
         }
+    }
+
+    public JSONObject cabañaToJson(){
+        JSONObject json = new JSONObject();
+        json.put("id" , this.id);
+        json.put("nombre", this.nombre);
+        json.put("habitaciones", this.habitaciones);
+        json.put("baños", this.baños);
+        json.put("isOcupada", this.isOcupada);
+        if (this.arrendatario != null) {
+            json.put("arrendatarios", this.arrendatario.getUsuario());}
+        return json;
     }
 }
