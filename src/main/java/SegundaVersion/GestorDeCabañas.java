@@ -2,13 +2,13 @@ package SegundaVersion;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class SistemaReservas {
+public class GestorDeCabañas {
 
     //Listas para almacenar los datos en formato de sus respectivas Clases:
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Cabaña> listaCabañas;
 
-    public SistemaReservas(){
+    public GestorDeCabañas(){
         listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
         listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
     }
@@ -17,10 +17,10 @@ public class SistemaReservas {
     public ArrayList<Cliente> getListaClientes(){
         return this.listaClientes;
     }
-
     public ArrayList<Cabaña> getListaCabañas() {
         return this.listaCabañas;
     }
+
 
     //Metodos para instanciar los objetos, a partir de un Json:
     private Cliente instanciarClienteJson (JSONObject archivoCliente) {

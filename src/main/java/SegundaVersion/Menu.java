@@ -1,8 +1,5 @@
 package SegundaVersion;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -11,7 +8,7 @@ public class Menu {
 
     public void MenuBienvenida() {
 
-        SistemaReservas instanciador = new SistemaReservas();
+        GestorDeCabañas instanciador = new GestorDeCabañas();
 
         String Seleccion;
 
@@ -27,7 +24,7 @@ public class Menu {
         } while (!Seleccion.equals("0"));
     }
 
-    public void menuPrincipal(Cliente usuario, SistemaReservas instanciador) {;
+    public void menuPrincipal(Cliente usuario, GestorDeCabañas instanciador) {;
 
         String seleccion;
 
