@@ -89,8 +89,8 @@ public class SistemaReservas {
         Cabaña cabaña2 = new Cabaña(2,"Cabaña 2",3,2,false,null);
         listaCabañas.add(cabaña1);
         listaCabañas.add(cabaña2);
-        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña1.getId()), cabaña1.toJson());
-        new GestorDeArchivos().escribirArchivoJSON("cabaña", Integer.toString(cabaña2.getId()), cabaña2.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña1.getId()), cabaña1.toJson());
+        new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña2.getId()), cabaña2.toJson());
     }
 
     public void loginUsario() {

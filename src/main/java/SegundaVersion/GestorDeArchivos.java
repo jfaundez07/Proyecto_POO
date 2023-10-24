@@ -98,7 +98,7 @@ public class GestorDeArchivos {
 
     //   Metodo que regresa todos los cabañas dentro de una carpeta como un array de jsons
     public ArrayList<JSONObject> listaJsonCabañas(){
-        return  listaArchivosJson("Cabaña");
+        return  listaArchivosJson("Cabañas");
     }
 
 }
