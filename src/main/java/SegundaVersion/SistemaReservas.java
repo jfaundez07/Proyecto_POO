@@ -10,7 +10,15 @@ public class SistemaReservas {
     private ArrayList<Cliente> listaClientes = new ArrayList<>();
     private ArrayList<Cabaña> listaCabañas = new ArrayList<>();
 
-    public static Scanner leer = new Scanner(System.in);
+    private String lecturaString(){
+        java.util.Scanner leer = new java.util.Scanner(System.in);
+        return leer.nextLine();
+    }
+
+    private int lecturaInt(){
+        java.util.Scanner leer = new java.util.Scanner(System.in);
+        return leer.nextInt();
+    }
 
     public ArrayList<Cliente> getListaClientes(){
         return this.listaClientes;
@@ -29,8 +37,9 @@ public class SistemaReservas {
     public void setListaClientes(){
 
     }
-
-
+    public ArrayList<Cabaña> getListaCabañas() {
+        return listaCabañas;
+    }
     //Metodos para almacenar el objeto en la lista de objetos:
 
     public void rellenarListaClientesPorDefecto(){
@@ -47,7 +56,7 @@ public class SistemaReservas {
         listaCabañas.add(cabaña2);
     }
 
-    public int loginUsario(ArrayList<Cliente> listaClientes) {
+    public int loginUsario() {
 
         int posicion;
 
@@ -58,10 +67,10 @@ public class SistemaReservas {
             System.out.println("\nA continuacion ingrese los datos solicitados");
 
             System.out.println("Ingrese su nombre previamente registrado: ");
-            String usuario = leer.nextLine();
+            String usuario = lecturaString();
 
             System.out.println("Ingrese su contraseña");
-            String contraseña = leer.nextLine();
+            String contraseña = lecturaString();
 
             posicion = 0;
 
@@ -101,5 +110,79 @@ public class SistemaReservas {
         }
         return posicion;
     }
+
+    public void reservarCabaña(Cliente usr){
+        System.out.println("\nReserva de cabañas");
+        mostrarCabañasExistentes();
+        System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
+        try{
+            int elegirID = lecturaInt();
+            for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+                if (elegirID == cabaña.getId()) {
+                    if (!cabaña.getIsOcupada()) {
+                        cabaña.setIsOcupada(true);
+                        cabaña.setArrendatario(usr);
+                        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
+                        System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
+                    } else{
+                        System.out.println("\nCabaña ocupada");
+                    }
+                }
+            }
+        }catch (Exception e) {
+            // manejar la excepción
+            System.out.println("Opcion inválida");
+        }
+    }
+    public void mostrarCabañasExistentes() {
+
+        System.out.println("\nCabañas existentes: ");
+
+        for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
+
+            cabaña.mostrarCabaña();
+
+        }
+    }
+    public void singUP(){
+
+        String Usuario;
+        int Celular = 0;
+        String Contraseña;
+        String Contraseña2;
+
+        System.out.println("Ingrese el nombre de su nuevo usuario");
+        Usuario = lecturaString();
+
+        do {
+            System.out.println("Ingrese celular valido. (9 digitos, solo numeros)");
+            try{
+                Celular = lecturaInt();}
+            catch (Exception e){
+                System.out.println("Valores no validos");
+            }
+
+        } while (!(Integer.toString(Celular).length() == 9));
+
+        do {
+            System.out.println("Ingrese Contraseña");
+            Contraseña = lecturaString();
+
+            System.out.println("Confirme Contaseña");
+            Contraseña2 = lecturaString();
+
+        } while (!Contraseña.equals(Contraseña2));
+
+
+        if (!new GestorDeArchivos().usuarioExiste(Usuario)) {
+            this.listaClientes.add(new Cliente(Usuario, Contraseña, Celular));
+            new GestorDeArchivos().escribirArchivoJSON("Cliente", Usuario, new Cliente(Usuario, Contraseña, Celular).toJson());
+            System.out.println("Usuario creado correctamente.");
+        } else {
+            System.out.println("Usuario ya existe.");
+        }
+
+    }
+}
 
 }

@@ -16,7 +16,7 @@ public class Menu {
 
     public void menu(ArrayList<Cabaña> listaCabañas, ArrayList<Cliente> listaClientes, SistemaReservas sistemaReservas) {
 
-        Cliente clienteIngresado = listaClientes.get(sistemaReservas.loginUsario(listaClientes));
+        Cliente clienteIngresado = listaClientes.get(sistemaReservas.loginUsario());
 
         String seleccion;
 
@@ -54,7 +54,7 @@ public class Menu {
             Seleccion = leer.nextLine();
 
             switch (Seleccion){
-                case "1" -> sistemaReservas.loginUsario(sistemaReservas.getListaClientes());
+                case "1" -> sistemaReservas.loginUsario();
                 case "2" -> System.out.println("Aun no existe");
             }
 

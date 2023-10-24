@@ -1,11 +1,21 @@
 package SegundaVersion;
 
+import org.json.JSONObject;
+
 public class Cliente {
 
     //Atributros:
     private String usuario;
     private String contraseña;
     private int celular;
+
+    public JSONObject toJson(){
+        JSONObject json = new JSONObject();
+        json.put("usuario" , this.usuario);
+        json.put("celular", this.celular);
+        json.put("contraseña", this.contraseña);
+        return json;
+    }
 
     //Constructores:
 

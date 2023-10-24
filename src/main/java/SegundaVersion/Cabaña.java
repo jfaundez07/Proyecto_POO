@@ -1,5 +1,7 @@
 package SegundaVersion;
 
+import org.json.JSONObject;
+
 public class Cabaña {
 
     //Atributos:
@@ -64,6 +66,18 @@ public class Cabaña {
 
     //Metodos de la clase:
 
+    public JSONObject toJson(){
+        JSONObject json = new JSONObject();
+        json.put("id" , this.id);
+        json.put("nombre", this.nombre);
+        json.put("habitaciones", this.habitaciones);
+        json.put("baños", this.baños);
+        json.put("isOcupada", this.isOcupada);
+        if (this.arrendatario != null) {
+            json.put("arrendatarios", this.arrendatario.getUsuario());}
+        return json;
+    }
+
     public void mostrarCabaña() {
 
         System.out.println();
@@ -73,5 +87,6 @@ public class Cabaña {
         System.out.println("Cantidad de baños: " + this.baños);
         System.out.println("Esta ocupada: " + this.isOcupada);
     }
+
 
 }
