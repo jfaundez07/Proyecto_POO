@@ -109,6 +109,4 @@ public class Cabaña {
             System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
         }
     }
-
-
 }
