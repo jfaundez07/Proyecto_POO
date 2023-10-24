@@ -85,6 +85,7 @@ public class Cabaña {
         System.out.println("Cantidad de habitaciones: " + this.habitaciones);
         System.out.println("Cantidad de baños: " + this.baños);
         System.out.println("Esta ocupada: " + this.isOcupada);
+        System.out.println("Arrendatario: " + this.arrendatario);
     }
 
     //Transforma el objeto cabaña a objeto json

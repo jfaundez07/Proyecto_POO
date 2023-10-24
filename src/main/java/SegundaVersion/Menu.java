@@ -65,7 +65,6 @@ public class Menu {
         System.out.println("\nCabañas existentes: ");
 
         for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
-
             cabaña.mostrarCabaña();
 
         }
@@ -82,7 +81,7 @@ public class Menu {
 
             for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
 
-                if (idExiste(elegirID, cabaña)) {
+                if (elegirID == cabaña.getId()) {
 
                     if (!cabaña.getIsOcupada()) {
 
@@ -100,7 +99,6 @@ public class Menu {
             // manejar la excepción
             System.out.println("Opcion inválida");
         }
-
     }
 
     public void mostrarCabañasReservadas(Cliente usr) {
@@ -136,7 +134,7 @@ public class Menu {
 
             for (Cabaña cabaña : new SistemaReservas().getListaCabañas()) {
 
-                if (idExiste(elegirID, cabaña)) {
+                if (elegirID == cabaña.getId()) {
 
                     if (cabaña.getIsOcupada()) {
 
@@ -154,7 +152,4 @@ public class Menu {
         }
     }
 
-    public boolean idExiste(int id, Cabaña cabañaSeleccionada) {
-        return id == cabañaSeleccionada.getId();
-    }
 }
