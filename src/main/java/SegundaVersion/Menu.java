@@ -1,8 +1,5 @@
 package SegundaVersion;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -38,7 +35,7 @@ public class Menu {
         System.out.println("[0] Salir\n[1] Mostrar Cabañas existentes\n[2] Reservar Cabaña\n[3] Ver Mis Cabañas Reservadas\n[4] Realizar Check-Out\nQue desea hacer?: ");
     }
 
-    public void menu(Cliente usr) {
+    public void menuPrincipal(Cliente usr) {
 
         String seleccion;
 
@@ -49,7 +46,7 @@ public class Menu {
             switch (seleccion) {
 
                 case "1" -> mostrarCabañasExistentes();
-                case "2" -> reservarCabaña(usr);
+                case "2" -> menuReservarCabaña(usr);
                 case "3" -> mostrarCabañasReservadas(usr);
                 case "4" -> checkOutCabaña(usr);
 
@@ -70,7 +67,7 @@ public class Menu {
         }
     }
 
-    public void reservarCabaña(Cliente usr){
+    public void menuReservarCabaña(Cliente usr){
 
         System.out.println("\nReserva de cabañas");
 
@@ -140,7 +137,8 @@ public class Menu {
 
                         cabaña.setIsOcupada(false);
                         cabaña.setArrendatario(null);
-                        new GestorDeArchivos().escribirArchivoJSON("Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
+                        new GestorDeArchivos().escribirArchivoJSON(
+                                "Cabaña", Integer.toString(cabaña.getId()), cabaña.toJson());
 
                         System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
                     }

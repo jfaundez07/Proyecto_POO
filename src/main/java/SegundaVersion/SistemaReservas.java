@@ -48,7 +48,7 @@ public class SistemaReservas {
 
    private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
        if (archivoCabaña.getBoolean("isOcupada")){
-           int pos = obtenerPosicionUsuario(listaClientes, archivoCabaña.getString("arrendatarios"));
+           int pos = obtenerPosicionUsuario(archivoCabaña.getString("arrendatarios"));
            return new Cabaña(
                    archivoCabaña.getInt("id"),
                    archivoCabaña.getString("nombre"),
@@ -112,22 +112,21 @@ public class SistemaReservas {
 
             posicion = 0;
 
-            if (validarUsuario(listaClientes, usuario, contraseña)) {
-                posicion = obtenerPosicionUsuario(listaClientes, usuario);
+            if (validarUsuario(usuario, contraseña)) {
+                posicion = obtenerPosicionUsuario(usuario);
                 validar = true;
             }
 
 
         } while (!validar);
 
-        new Menu().menu(new SistemaReservas().getListaClientes().get(posicion));
+        new Menu().menuPrincipal(listaClientes.get(posicion));
 
     }
 
-    public boolean validarUsuario(ArrayList<Cliente> listaClientes, String usuario, String contraseña) {
+    public boolean validarUsuario(String usuario, String contraseña) {
 
         for (int i = 0; i < listaClientes.size(); i++) {
-
             if ((listaClientes.get(i)).getUsuario().equals(usuario) && (listaClientes.get(i)).getContraseña().equals(contraseña)) {
                 return true;
             }
@@ -137,12 +136,11 @@ public class SistemaReservas {
         return false;
     }
 
-    public int obtenerPosicionUsuario(ArrayList<Cliente> listaUsuarios, String Usuario) {
-
+    public int obtenerPosicionUsuario(String Usuario) {
         int posicion = -1;
 
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-            if ((listaUsuarios.get(i)).getUsuario().equals(Usuario)) {
+        for (int i = 0; i < listaClientes.size(); i++) {
+            if ((listaClientes.get(i)).getUsuario().equals(Usuario)) {
                 posicion = i;
             }
         }
