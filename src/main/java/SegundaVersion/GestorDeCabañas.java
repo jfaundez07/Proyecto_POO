@@ -103,15 +103,10 @@ public class GestorDeCabañas {
     }
 
     //Scanners:
-    private String lecturaString(){
-        java.util.Scanner leer = new java.util.Scanner(System.in);
-        return leer.nextLine();
-    }
-
     private int lecturaInt(){
         java.util.Scanner leer = new java.util.Scanner(System.in);
         return leer.nextInt();
     }
-    
+
 }
 

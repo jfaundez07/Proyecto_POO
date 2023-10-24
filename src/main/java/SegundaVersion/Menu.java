@@ -5,9 +5,7 @@ import java.util.Scanner;
 public class Menu {
     public static Scanner leer = new Scanner(System.in);
 
-
     public void MenuBienvenida() {
-
 
         GestorDeClientes gestorDeClientes = new GestorDeClientes();
         GestorDeCabañas gestorDeCabañas = new GestorDeCabañas();

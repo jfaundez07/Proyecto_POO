@@ -20,7 +20,7 @@ public class GestorDeClientes {
         return new Cliente(archivoCliente.getString("usuario"), archivoCliente.getString("contraseña"), archivoCliente.getInt("celular"));
     }
 
-    // genera una lista de clientes a partir de una lista de archivos json
+    //genera una lista de clientes a partir de una lista de archivos json
     private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
         ArrayList<Cliente> newListClientes = new ArrayList<>();
         for (JSONObject cliente : clientes){
@@ -75,11 +75,10 @@ public class GestorDeClientes {
                 validar = true;
             }
         } while (!validar);
-        //new Menu().menuPrincipal(listaClientes.get(posicion));
         return listaClientes.get(posicion);
     }
 
-    public boolean validarUsuario(String usuario, String contraseña) {
+    private boolean validarUsuario(String usuario, String contraseña) {
         for (int i = 0; i < listaClientes.size(); i++) {
 
             if ((listaClientes.get(i)).getUsuario().equals(usuario) && (listaClientes.get(i)).getContraseña().equals(contraseña)) {
