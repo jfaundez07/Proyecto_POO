@@ -5,38 +5,28 @@ import java.util.ArrayList;
 public class GestorDeCabañas {
 
     //Listas para almacenar los datos en formato de sus respectivas Clases:
-    private ArrayList<Cliente> listaClientes;
     private ArrayList<Cabaña> listaCabañas;
 
     public GestorDeCabañas(){
-        listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
         listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
     }
 
-
-    public ArrayList<Cliente> getListaClientes(){
-        return this.listaClientes;
-    }
     public ArrayList<Cabaña> getListaCabañas() {
         return this.listaCabañas;
     }
 
-
-    //Metodos para instanciar los objetos, a partir de un Json:
-    private Cliente instanciarClienteJson (JSONObject archivoCliente) {
-        return new Cliente(archivoCliente.getString("usuario"), archivoCliente.getString("contraseña"), archivoCliente.getInt("celular"));
-    }
-
+    //Metodo para instanciar los objetos, a partir de un Json:
     private Cabaña instanciarCabañaJson (JSONObject archivoCabaña) {
+        GestorDeClientes gestorDeClientes = new GestorDeClientes();
         if (archivoCabaña.getBoolean("isOcupada")){
-            int pos = obtenerPosicionUsuario(archivoCabaña.getString("arrendatarios"));
+            int pos = gestorDeClientes.obtenerPosicionUsuario(archivoCabaña.getString("arrendatarios"));
             return new Cabaña(
                     archivoCabaña.getInt("id"),
                     archivoCabaña.getString("nombre"),
                     archivoCabaña.getInt("habitaciones"),
                     archivoCabaña.getInt("baños"),
                     archivoCabaña.getBoolean("isOcupada"),
-                    listaClientes.get(pos));
+                    gestorDeClientes.getListaClientes().get(pos));
         }
         return new Cabaña(
                 archivoCabaña.getInt("id"),
@@ -45,15 +35,7 @@ public class GestorDeCabañas {
                 archivoCabaña.getInt("baños"));
     }
 
-    // genera una lista de clientes a partir de una lista de archivos json
-    private ArrayList<Cliente> setListaClientes(ArrayList<JSONObject> clientes){
-        ArrayList<Cliente> newListClientes = new ArrayList<>();
-        for (JSONObject cliente : clientes){
-            newListClientes.add(instanciarClienteJson(cliente));
-        }
-        return newListClientes;
-    }
-
+    // genera una lista de cabañas a partir de una lista de archivos json
     private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
         ArrayList<Cabaña> newListCabaña = new ArrayList<>();
         for (JSONObject cabaña : cabañas){
@@ -130,78 +112,6 @@ public class GestorDeCabañas {
         java.util.Scanner leer = new java.util.Scanner(System.in);
         return leer.nextInt();
     }
-
-    public void singUP(){
-        String Usuario;
-        int Celular = 0;
-        String Contraseña;
-        String Contraseña2;
-        System.out.println("Ingrese el nombre de su nuevo usuario");
-        Usuario = lecturaString();
-        do {
-            System.out.println("Ingrese celular valido. (9 digitos, solo numeros)");
-            try{
-                Celular = lecturaInt();}
-            catch (Exception e){
-                System.out.println("Valores no validos");
-            }
-        } while (!(Integer.toString(Celular).length() == 9));
-        do {
-            System.out.println("Ingrese Contraseña");
-            Contraseña = lecturaString();
-            System.out.println("Confirme Contaseña");
-            Contraseña2 = lecturaString();
-        } while (!Contraseña.equals(Contraseña2));
-        if (!new GestorDeArchivos().usuarioExiste(Usuario)) {
-            this.listaClientes.add(new Cliente(Usuario, Contraseña, Celular));
-            new GestorDeArchivos().escribirArchivoJSON("Cliente", Usuario, new Cliente(Usuario, Contraseña, Celular).clienteToJson());
-            System.out.println("Usuario creado correctamente.");
-        } else {
-            System.out.println("Usuario ya existe.");
-        }
-    }
-
-    public Cliente loginUsario() {
-        int posicion;
-        String usuario;
-        boolean validar = false;
-        do {
-            System.out.println("\nA continuacion ingrese los datos solicitados");
-            System.out.println("Ingrese su nombre previamente registrado: ");
-            usuario = lecturaString();
-            System.out.println("Ingrese su contraseña");
-            String contraseña = lecturaString();
-            posicion = 0;
-            if (validarUsuario(usuario, contraseña)) {
-                posicion = obtenerPosicionUsuario(usuario);
-                validar = true;
-            }
-        } while (!validar);
-        //new Menu().menuPrincipal(listaClientes.get(posicion));
-        return listaClientes.get(posicion);
-    }
-
-    public boolean validarUsuario(String usuario, String contraseña) {
-        for (int i = 0; i < listaClientes.size(); i++) {
-
-            if ((listaClientes.get(i)).getUsuario().equals(usuario) && (listaClientes.get(i)).getContraseña().equals(contraseña)) {
-                return true;
-            }
-        }
-        System.out.println("Usuario y/o contraseña incorrecto");
-        return false;
-    }
-
-    public int obtenerPosicionUsuario(String Usuario) {
-
-        int posicion = -1;
-
-        for (int i = 0; i < this.listaClientes.size(); i++) {
-            if ((this.listaClientes.get(i)).getUsuario().equals(Usuario)) {
-                posicion = i;
-            }
-        }
-        return posicion;
-    }
+    
 }
 

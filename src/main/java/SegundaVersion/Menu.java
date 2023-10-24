@@ -8,7 +8,9 @@ public class Menu {
 
     public void MenuBienvenida() {
 
-        GestorDeCabañas instanciador = new GestorDeCabañas();
+
+        GestorDeClientes gestorDeClientes = new GestorDeClientes();
+        GestorDeCabañas gestorDeCabañas = new GestorDeCabañas();
 
         String Seleccion;
 
@@ -17,8 +19,8 @@ public class Menu {
             Seleccion = leer.nextLine();
 
             switch (Seleccion){
-                case "1" -> menuPrincipal(instanciador.loginUsario(), instanciador);
-                case "2" -> instanciador.singUP();
+                case "1" -> menuPrincipal(gestorDeClientes.loginUsario(), gestorDeCabañas);
+                case "2" -> gestorDeClientes.singUP();
             }
 
         } while (!Seleccion.equals("0"));
