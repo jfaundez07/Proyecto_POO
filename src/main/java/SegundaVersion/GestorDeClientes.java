@@ -111,4 +111,10 @@ public class GestorDeClientes {
         return leer.nextInt();
     }
 
+    public void registrarClientesEnArchivoJson(){
+        for (Cliente cliente : listaClientes){
+            new GestorDeArchivos().escribirArchivoJSON("Cliente", cliente.getUsuario(), cliente.clienteToJson());
+        }
+    }
+
 }

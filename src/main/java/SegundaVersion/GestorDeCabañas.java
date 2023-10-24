@@ -107,6 +107,11 @@ public class GestorDeCabañas {
         java.util.Scanner leer = new java.util.Scanner(System.in);
         return leer.nextInt();
     }
+    public void registrarCabañasEnArchivoJson(){
+        for (Cabaña cabaña : listaCabañas){
+            new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña.getId()), cabaña.cabañaToJson());
+        }
+    }
 
 }
 

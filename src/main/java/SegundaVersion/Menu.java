@@ -22,6 +22,9 @@ public class Menu {
             }
 
         } while (!Seleccion.equals("0"));
+
+        gestorDeCabañas.registrarCabañasEnArchivoJson();
+        gestorDeClientes.registrarClientesEnArchivoJson();
     }
 
     public void menuPrincipal(Cliente usuario, GestorDeCabañas gestorDeCabañas) {;
