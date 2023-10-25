@@ -46,12 +46,12 @@ public class Menu {
     }
 
     public void opcionesMenuPrincipal(Cliente usuarioIngresado) {
-        System.out.println("\nMenu Cabañas. Usuario: " + usuarioIngresado.getUsuario());
+        System.out.println("\n#-----MENÚ CABAÑAS-----#\nUsuario: " + usuarioIngresado.getUsuario());
         System.out.println("[0] Salir\n[1] Mostrar Cabañas existentes\n[2] Reservar Cabaña\n[3] Ver Mis Cabañas Reservadas\n[4] Realizar Check-Out\nQue desea hacer?: ");
     }
 
     public void OpcionesMenuBienvenida() {
-        System.out.println("\nBienvenido a R.A \nElija una opcion:");
+        System.out.println("\n#-----Bienvenido a R.A-----#\nElija una opcion:");
         System.out.println("[0] Salir\n[1] Iniciar sesión\n[2] Registrar usuario\nQue desea hacer?: ");
     }
 

@@ -34,10 +34,11 @@ public class GestorDeClientes {
         int Celular = 0;
         String Contraseña;
         String Contraseña2;
-        System.out.println("Ingrese el nombre de su nuevo usuario");
+        System.out.println("\n#----REGISTRAR USUARIO----#");
+        System.out.println("\n-> Ingrese el nombre de su nuevo usuario: ");
         Usuario = lecturaString();
         do {
-            System.out.println("Ingrese celular valido. (9 digitos, solo numeros)");
+            System.out.println("-> Ingrese celular valido. (9 digitos, solo numeros): ");
             try{
                 Celular = lecturaInt();}
             catch (Exception e){
@@ -45,15 +46,15 @@ public class GestorDeClientes {
             }
         } while (!(Integer.toString(Celular).length() == 9));
         do {
-            System.out.println("Ingrese Contraseña");
+            System.out.println("-> Ingrese Contraseña: ");
             Contraseña = lecturaString();
-            System.out.println("Confirme Contaseña");
+            System.out.println("-> Confirme Contaseña: ");
             Contraseña2 = lecturaString();
         } while (!Contraseña.equals(Contraseña2));
         if (!new GestorDeArchivos().usuarioExiste(Usuario)) {
             this.listaClientes.add(new Cliente(Usuario, Contraseña, Celular));
             new GestorDeArchivos().escribirArchivoJSON("Cliente", Usuario, new Cliente(Usuario, Contraseña, Celular).clienteToJson());
-            System.out.println("Usuario creado correctamente.");
+            System.out.println("¡Usuario creado correctamente!.");
         } else {
             System.out.println("Usuario ya existe.");
         }
@@ -64,10 +65,11 @@ public class GestorDeClientes {
         String usuario;
         boolean validar = false;
         do {
+            System.out.println("\n#----INICIO DE SESION----#");
             System.out.println("\nA continuacion ingrese los datos solicitados");
-            System.out.println("Ingrese su nombre previamente registrado: ");
+            System.out.println("-> Ingrese su nombre previamente registrado: ");
             usuario = lecturaString();
-            System.out.println("Ingrese su contraseña");
+            System.out.println("-> Ingrese su contraseña: ");
             String contraseña = lecturaString();
             posicion = 0;
             if (validarUsuario(usuario, contraseña)) {

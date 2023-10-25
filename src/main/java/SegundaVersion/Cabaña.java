@@ -63,7 +63,7 @@ public class Cabaña {
             setIsOcupada(true);
             setArrendatario(usr);
             mostrarCabaña();
-            System.out.println(usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
+            System.out.println("\n" + usr.getUsuario() + "! Su cabaña fue reservada exitosamente");
         } else{
             System.out.println("\nCabaña ocupada");
         }

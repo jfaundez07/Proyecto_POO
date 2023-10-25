@@ -45,7 +45,7 @@ public class GestorDeCabañas {
     }
 
     public void menuReservarCabaña(Cliente usr){
-        System.out.println("\nReserva de cabañas");
+        System.out.println("\n#-----RESERVA DE CABAÑAS-----#");
         mostrarCabañasExistentes();
         System.out.println("\nIngrese la ID de la cabaña que desea reservar: ");
         try{
@@ -62,7 +62,7 @@ public class GestorDeCabañas {
     }
 
     public void menuCheckOutCabaña(Cliente usr){
-        System.out.println("\nCheck-Out Cabañas: ");
+        System.out.println("\n#-----CHECK-OUT CABAÑAS-----#");
         mostrarCabañasReservadas(usr);
         try{
             System.out.println("\nIngrese la ID de la cabaña que desea hacer check-out ");
@@ -80,13 +80,14 @@ public class GestorDeCabañas {
     }
 
     public void mostrarCabañasExistentes() {
-        System.out.println("\nCabañas existentes: ");
+        System.out.println("\n#-----CABAÑAS EXISTENTES-----#");
         for (Cabaña cabaña : this.listaCabañas) {
             cabaña.mostrarCabaña();
         }
     }
 
     public void mostrarCabañasReservadas(Cliente usr) {
+        System.out.println("\n#-----CABAÑAS RESERVADAS-----#");
         int contador = 0;
         for (int i = 0; i < this.listaCabañas.size(); i++) {
             try{
