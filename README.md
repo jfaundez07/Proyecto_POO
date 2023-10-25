@@ -14,11 +14,11 @@ cabañas que no se encuentran en las grandes plataformas tales como AIRBNB o Boo
 de reservar estas cabañas a través de la aplicación, puesto a que en principio estas se reservan hablando directamente 
 con los dueños de la pyme. De esta manera la reserva es más directa.
 
-Clases Principales:
-(1) Cabaña
-(2) Cliente
-(3) GestorDeCabañas
-(4) GestorDeClientes
-(5) GestorDeArchivos
-(6) Launcher
-(7) Menu
+Clases Principales:  
+(1) Cabaña  
+(2) Cliente  
+(3) GestorDeCabañas  
+(4) GestorDeClientes  
+(5) GestorDeArchivos  
+(6) Launcher  
+(7) Menu  
