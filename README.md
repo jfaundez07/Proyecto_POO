@@ -14,18 +14,11 @@ cabañas que no se encuentran en las grandes plataformas tales como AIRBNB o Boo
 de reservar estas cabañas a través de la aplicación, puesto a que en principio estas se reservan hablando directamente 
 con los dueños de la pyme. De esta manera la reserva es más directa.
 
-Métodos principales  
-
--Crear Usuario (nombre, celular, contraseña)  
-
--Iniciar sesión (Verifica que sea un usuario ya existente)  
-
--Crear Cabaña(json con las características de la cabaña) 
-
--Mostrar cabañas Arrendada(muestra la información de la cabaña)  
-
--Reservar Cabaña (se reserva la cabaña por 12 horas)  
-
--Mostrar Cabañas(que muestra la información de todas las cabañas, y el estado de estas, que será true si está ocupada, y false si está libre.)  
-
--Menú (Que se encarga de desplegar todas las funciones mencionadas anteriormente)
+Clases Principales:
+(1) Cabaña
+(2) Cliente
+(3) GestorDeCabañas
+(4) GestorDeClientes
+(5) GestorDeArchivos
+(6) Launcher
+(7) Menu
