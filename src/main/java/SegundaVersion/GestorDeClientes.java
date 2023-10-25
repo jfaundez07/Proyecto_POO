@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 public class GestorDeClientes {
     private ArrayList<Cliente> listaClientes;
+    
     public GestorDeClientes(){
         listaClientes = setListaClientes(new GestorDeArchivos().listaJsonCliente());
     }
