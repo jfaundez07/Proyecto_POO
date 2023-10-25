@@ -1,11 +1,7 @@
 package SegundaVersion;
-
 import org.json.JSONObject;
-
 public class Cabaña {
-
     //Atributos:
-
     private int id;
     private String nombre;
     private int habitaciones;
@@ -33,21 +29,12 @@ public class Cabaña {
         this.arrendatario = null;
     }
 
-
     //Metodos getter:
     public int getId() {
         return id;
     }
     public Cliente getArrendatario() {
         return arrendatario;
-    }
-    public boolean getIsOcupada() {
-        return isOcupada;
-    }
-
-    //Metodos setter:
-    public void setNombre(String Nombre) {
-        this.nombre = Nombre;
     }
     public void setIsOcupada(boolean isOcupada) {
         this.isOcupada = isOcupada;
@@ -57,7 +44,6 @@ public class Cabaña {
     }
 
     //Metodos de la clase:
-
     public void reservarCabaña(Cliente usr){
         if (!isOcupada) {
             setIsOcupada(true);
@@ -68,7 +54,6 @@ public class Cabaña {
             System.out.println("\nCabaña ocupada");
         }
     }
-
     public void mostrarCabaña() {
         System.out.println();
         System.out.println("Id: " + this.id);
@@ -89,7 +74,6 @@ public class Cabaña {
             System.out.println(usr.getUsuario() + "! El check-out fue realizado exitosamente");
         }
     }
-
     public JSONObject cabañaToJson(){
         JSONObject json = new JSONObject();
         json.put("id" , this.id);

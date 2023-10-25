@@ -1,9 +1,6 @@
 package SegundaVersion;
-
 import org.json.JSONObject;
-
 public class Cliente {
-
     //Atributros:
     private String usuario;
     private String contraseña;
@@ -15,24 +12,9 @@ public class Cliente {
         this.contraseña = contraseña;
         this.celular = celular;
     }
-
     //Metodos getter:
     public String getUsuario() {
         return usuario;
-    }
-    public int getCelular() {
-        return celular;
-    }
-
-    //Metodos setter:
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-    public void setCelular(int celular) {
-        this.celular = celular;
-    }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
     }
     public String getContraseña(){
         return this.contraseña;
@@ -45,5 +27,4 @@ public class Cliente {
         json.put("contraseña", this.contraseña);
         return json;
     }
-
 }

@@ -1,16 +1,12 @@
 package SegundaVersion;
 import org.json.JSONObject;
 import java.util.ArrayList;
-
 public class GestorDeCabañas {
-
     //Listas para almacenar los datos en formato de sus respectivas Clases:
     private ArrayList<Cabaña> listaCabañas;
-
     public GestorDeCabañas(){
         listaCabañas = setListaCabaña(new GestorDeArchivos().listaJsonCabañas());
     }
-
     public ArrayList<Cabaña> getListaCabañas() {
         return this.listaCabañas;
     }
@@ -34,7 +30,6 @@ public class GestorDeCabañas {
                 archivoCabaña.getInt("habitaciones"),
                 archivoCabaña.getInt("baños"));
     }
-
     // genera una lista de cabañas a partir de una lista de archivos json
     private ArrayList<Cabaña> setListaCabaña(ArrayList<JSONObject> cabañas){
         ArrayList<Cabaña> newListCabaña = new ArrayList<>();
@@ -43,7 +38,6 @@ public class GestorDeCabañas {
         }
         return newListCabaña;
     }
-
     public void menuReservarCabaña(Cliente usr){
         System.out.println("\n#-----RESERVA DE CABAÑAS-----#");
         mostrarCabañasExistentes();
@@ -60,7 +54,6 @@ public class GestorDeCabañas {
             System.out.println("Opcion inválida");
         }
     }
-
     public void menuCheckOutCabaña(Cliente usr){
         System.out.println("\n#-----CHECK-OUT CABAÑAS-----#");
         mostrarCabañasReservadas(usr);
@@ -78,14 +71,12 @@ public class GestorDeCabañas {
             System.out.println("Opcion inválida");
         }
     }
-
     public void mostrarCabañasExistentes() {
         System.out.println("\n#-----CABAÑAS EXISTENTES-----#");
         for (Cabaña cabaña : this.listaCabañas) {
             cabaña.mostrarCabaña();
         }
     }
-
     public void mostrarCabañasReservadas(Cliente usr) {
         System.out.println("\n#-----CABAÑAS RESERVADAS-----#");
         int contador = 0;
@@ -102,7 +93,6 @@ public class GestorDeCabañas {
             System.out.println(usr.getUsuario() + " Aun no ha reservado ninguna cabaña.");
         }
     }
-
     //Scanners:
     private int lecturaInt(){
         java.util.Scanner leer = new java.util.Scanner(System.in);
@@ -113,6 +103,5 @@ public class GestorDeCabañas {
             new GestorDeArchivos().escribirArchivoJSON("Cabañas", Integer.toString(cabaña.getId()), cabaña.cabañaToJson());
         }
     }
-
 }
 
