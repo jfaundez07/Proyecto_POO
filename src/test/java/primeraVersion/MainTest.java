@@ -1,11 +1,12 @@
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+package primeraVersion;
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import com.github.stefanbirkner.systemlambda.SystemLambda;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
@@ -17,14 +18,19 @@ class MainTest {
     JSONObject cabana2 = new JSONObject();
 
     String expectedOutput =
+            "Cabañas existentes: \n" +
                     "\n" +
                     "Id: 1\n" +
                     "Nombre: Cabaña 1\n" +
                     "Cantidad de habitaciones: 2\n" +
                     "Cantidad de baños: 1\n" +
-                    "Esta ocupada: false\n";
-
-    String textmostrarCabaña;
+                    "Estado: false\n" +
+                    "\n" +
+                    "Id: 2\n" +
+                    "Nombre: Cabaña 2\n" +
+                    "Cantidad de habitaciones: 3\n" +
+                    "Cantidad de baños: 2\n" +
+                    "Estado: false\n";
 
 
     @BeforeEach
@@ -55,14 +61,6 @@ class MainTest {
         Main.agregarCabaña(ListaCabañas, cabana1);
         Main.agregarCabaña(ListaCabañas, cabana2);
 
-        try {
-            textmostrarCabaña = SystemLambda.tapSystemOut(() -> {
-                Main.mostrarCabaña(cabana1);
-            });
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     @AfterEach
@@ -71,21 +69,21 @@ class MainTest {
 
     @Test
     void validarUsuarioCorrecto() {
-        assertTrue(Main.validarUsuario(ListaUsuarios, "Javier", "987654321"));
-        assertTrue(Main.validarUsuario(ListaUsuarios, "Klima", "135792468"));
+        Assertions.assertTrue(Main.validarUsuario(ListaUsuarios, "Javier", "987654321"));
+        Assertions.assertTrue(Main.validarUsuario(ListaUsuarios, "Klima", "135792468"));
     }
 
     @Test
     void validarUsuarioIncorrecto(){
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Javier", "123456789"));
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Klima", "123456789"));
-        assertFalse(Main.validarUsuario(ListaUsuarios, "Xiao", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Javier", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Klima", "123456789"));
+        Assertions.assertFalse(Main.validarUsuario(ListaUsuarios, "Xiao", "123456789"));
     }
 
     @Test
     void PosicionUsuario(){
-        assertEquals( 0,Main.obtenerPosicionUsuario(ListaUsuarios, "Javier", "987654321"));
-        assertEquals( 1,Main.obtenerPosicionUsuario(ListaUsuarios, "Klima", "135792468"));
+        Assertions.assertEquals( 0, Main.obtenerPosicionUsuario(ListaUsuarios, "Javier", "987654321"));
+        Assertions.assertEquals( 1, Main.obtenerPosicionUsuario(ListaUsuarios, "Klima", "135792468"));
     }
 
     @Test
@@ -121,10 +119,16 @@ class MainTest {
     }
 
     @Test
-    public void mostrarcabañasExistente(){
-        expectedOutput = expectedOutput.replace("\r\n", "\n");
-        textmostrarCabaña = textmostrarCabaña.replace("\r\n", "\n");
+    public void Mostrarcabañas(){
+        String text = null;
+        try {
+            text = SystemLambda.tapSystemOut(() -> {
+                Main.mostrarCabañasExistentes(ListaCabañas);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(expectedOutput, textmostrarCabaña);
+        assertEquals(expectedOutput, text);
     }
 }

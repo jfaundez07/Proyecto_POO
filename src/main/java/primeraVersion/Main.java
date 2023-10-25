@@ -1,3 +1,5 @@
+package primeraVersion;
+
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -253,13 +255,11 @@ public class Main {
                 case "2" -> reservarCabaña(usuarioIngresado, listCabañas);
                 case "3" -> mostrarCabañasReservadas(usuarioIngresado, listCabañas);
                 case "4" -> checkOutCabaña(usuarioIngresado, listCabañas);
-
             }
 
         } while (!seleccion.equals("0"));
 
     }
-
     public static void OpcionesMenuBienvenida() {
         System.out.println("\nBienvenido a R.A \nElija una opcion:");
         System.out.println("[0] Salir\n[1] Iniciar sesión\n[2] Registrar usuario\nQue desea hacer?: ");
