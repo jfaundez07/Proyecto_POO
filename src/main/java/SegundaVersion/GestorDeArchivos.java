@@ -29,7 +29,7 @@ public class GestorDeArchivos {
     //Archivos Json
 
     //Metodo que verifica que un archivo sea .json
-    public Boolean esArchivoJson(File ruta) {
+    private Boolean esArchivoJson(File ruta) {
         return getExtension(ruta).equals(".json");
     }
 
@@ -52,7 +52,7 @@ public class GestorDeArchivos {
     }
 
     //Metodo que toma un archivo .json y regresa un objeto json
-    public JSONObject leerArchivoJson(String ruta){
+    private JSONObject leerArchivoJson(String ruta){
         BufferedReader Lector;
         JSONObject Contenido = new JSONObject();
 
@@ -68,7 +68,7 @@ public class GestorDeArchivos {
     }
 
     // Metodo que regresa una lista de jsons con todos los archivos .json dentro de una carpeta
-    public ArrayList<JSONObject> listaArchivosJson(String carpeta) {
+    private ArrayList<JSONObject> listaArchivosJson(String carpeta) {
         ArrayList<JSONObject> listaArchivosJson = new ArrayList<>();
         for (File archivo : listaArchivos(carpeta)){
             if   (esArchivoJson(archivo)){
