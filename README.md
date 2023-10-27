@@ -8,8 +8,7 @@
 https://youtu.be/9TWX9oW2B6I?feature=shared
 
 ## Link video segundo avance:
-https://youtube.com/watch?v=sUfhY
-700sc&feature=shared
+https://youtu.be/sUfhY-700sc?feature=shared
 
 ## Descripcion de la problematica: 
 
